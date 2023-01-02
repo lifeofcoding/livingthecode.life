@@ -2,13 +2,13 @@ import { type NextPage } from "next";
 import Link from "next/link";
 import Layout from "../components/Main";
 
-const Projects: NextPage = () => {
+const About: NextPage = () => {
   return (
-    <Layout title="Projects">
+    <Layout title="About">
       <main className="relative z-10 flex min-h-screen flex-col items-center">
         <div className="container flex flex-col items-center gap-12 px-4 py-16">
           <h1 className="w-full text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-            Projects
+            About
           </h1>
 
           <div className="w-3/4">
@@ -42,4 +42,4 @@ const Projects: NextPage = () => {
   );
 };
 
-export default Projects;
+export default About;

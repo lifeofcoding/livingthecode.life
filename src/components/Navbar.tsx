@@ -25,6 +25,13 @@ const Navbar = ({ path }: NavbarT) => {
               name="nav-link"
               checked={path === "/projects"}
             />
+            <input
+              type="radio"
+              value="projects"
+              id="about"
+              name="nav-link"
+              checked={path === "/about"}
+            />
 
             <div className="nav-wrapper">
               <div className="nav-item">
@@ -35,6 +42,11 @@ const Navbar = ({ path }: NavbarT) => {
               <div className="nav-item">
                 <Link href="/projects">
                   <label htmlFor="projects">Projects</label>
+                </Link>
+              </div>
+              <div className="nav-item">
+                <Link href="/about">
+                  <label htmlFor="about">About</label>
                 </Link>
               </div>
               <div className="nav-slider"></div>

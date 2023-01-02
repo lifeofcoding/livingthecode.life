@@ -21,7 +21,7 @@ const Layout = ({ children, router }: LayoutT) => {
         <meta property="og:site_name" content="QDMeds" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="/card.png" />
-        <title>QDMeds &copy;</title>
+        <title>LivingTheCode.Life &copy;</title>
       </Head>
 
       <Navbar path={router.asPath} />

@@ -12,7 +12,7 @@
   }
 
   nav.navbar .nav-item {
-    @apply z-10 w-2/12 cursor-pointer self-center p-2 text-center text-white;
+    @apply z-10 w-2/12 cursor-pointer self-center rounded p-2 text-center text-white hover:bg-[#15162c80];
   }
 
   nav.navbar .nav-item label {
@@ -24,11 +24,15 @@
   }
 
   nav.navbar .nav-slider {
-    @apply absolute left-0 z-0 m-1 h-[100%] w-2/12 rounded bg-[#15162c];
+    @apply absolute left-0 bottom-0 z-0 h-[90%] w-2/12 rounded bg-[#15162c];
     transition: left linear 0.5s;
   }
 
   nav.navbar #projects:checked ~ .nav-wrapper .nav-slider {
-    left: 16%;
+    left: 16.6%;
+  }
+
+  nav.navbar #about:checked ~ .nav-wrapper .nav-slider {
+    left: calc(16.6% * 2);
   }
 }
