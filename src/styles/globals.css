@@ -1,3 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  nav.navbar {
+    @apply h-[50px] w-full bg-black bg-gradient-to-b from-[#2e026d] to-[#15162c];
+  }
+
+  nav.navbar [type="radio"] {
+    @apply hidden;
+  }
+
+  nav.navbar .nav-item {
+    @apply z-10 w-2/12 cursor-pointer self-center p-2 text-center text-white;
+  }
+
+  nav.navbar .nav-item label {
+    @apply cursor-pointer;
+  }
+
+  nav.navbar .nav-wrapper {
+    @apply relative flex w-[100%];
+  }
+
+  nav.navbar .nav-slider {
+    @apply absolute left-0 z-0 m-1 h-[100%] w-2/12 rounded bg-[#15162c];
+    transition: left linear 0.5s;
+  }
+
+  nav.navbar #projects:checked ~ .nav-wrapper .nav-slider {
+    left: 16%;
+  }
+}
