@@ -20,11 +20,18 @@
   }
 
   nav.navbar .nav-wrapper {
-    @apply relative flex w-[100%];
+    @apply relative flex w-[100%] flex-col overflow-hidden bg-gradient-to-b from-[#2e026d] to-[#15162c] opacity-0 md:flex-row md:bg-transparent md:opacity-100;
+    transition: all 0.5s ease-in-out;
+    transform: translateY(10%);
+  }
+
+  nav.navbar .nav-wrapper.open {
+    transform: translateY(0);
+    @apply opacity-100;
   }
 
   nav.navbar .nav-slider {
-    @apply absolute left-0 bottom-0 z-0 h-[90%] w-2/12 rounded bg-[#15162c];
+    @apply absolute left-0 bottom-0 z-0 hidden h-[90%] w-2/12 rounded bg-[#15162c] md:block;
     transition: left linear 0.5s;
   }
 
