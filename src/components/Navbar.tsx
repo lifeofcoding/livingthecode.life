@@ -13,7 +13,9 @@ const Navbar = ({ path }: NavbarT) => {
     <nav className="navbar sticky top-0 z-20">
       <div className="container mx-auto flex flex-wrap items-center justify-between">
         <div className="m-2 flex items-center text-white">
-          <span className="text-md font-semibold">LivingTheCode.Life</span>
+          <span className="text-md font-semibold tracking-tight">
+            LivingTheCode.Life
+          </span>
         </div>
 
         <div className="inline-flex justify-end md:hidden">
