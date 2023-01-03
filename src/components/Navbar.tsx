@@ -37,7 +37,7 @@ const Navbar = ({ path }: NavbarT) => {
           </button>
         </div>
 
-        <div className="w-full flex-grow md:relative md:w-auto">
+        <div className="w-full flex-grow md:w-auto">
           <input
             type="radio"
             value="home"

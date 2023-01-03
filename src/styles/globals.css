@@ -20,26 +20,27 @@
   }
 
   nav.navbar .nav-wrapper {
-    @apply relative flex w-[100%] flex-col overflow-hidden bg-gradient-to-b from-[#2e026d] to-[#15162c] opacity-0 md:flex-row md:bg-transparent md:opacity-100;
+    @apply relative flex h-0 flex-col justify-end overflow-hidden bg-gradient-to-b from-[#2e026d] to-[#15162c] opacity-0 md:h-auto md:flex-row md:bg-transparent md:opacity-100;
     transition: all 0.5s ease-in-out;
     transform: translateY(10%);
   }
 
   nav.navbar .nav-wrapper.open {
     transform: translateY(0);
-    @apply opacity-100;
+    @apply h-auto opacity-100;
   }
 
   nav.navbar .nav-slider {
-    @apply absolute left-0 bottom-0 z-0 hidden h-[90%] w-2/12 rounded bg-[#15162c] md:block;
-    transition: left linear 0.5s;
+    @apply absolute bottom-0 z-0 hidden h-[90%] w-2/12 rounded bg-[#15162c] md:block;
+    transition: right linear 0.5s;
+    right: calc(16.6% * 2);
   }
 
   nav.navbar #projects:checked ~ .nav-wrapper .nav-slider {
-    left: 16.6%;
+    right: 16.6%;
   }
 
   nav.navbar #about:checked ~ .nav-wrapper .nav-slider {
-    left: calc(16.6% * 2);
+    right: 0;
   }
 }
