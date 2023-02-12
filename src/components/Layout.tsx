@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Head from "next/head";
 import type { NextRouter } from "next/router";
+import { BsGithub } from "react-icons/bs";
 import Navbar from "./Navbar";
 import { useStore } from "../store/store";
 
@@ -69,6 +70,15 @@ const Layout = ({ children, router }: LayoutT) => {
       <Navbar path={router.asPath} />
 
       {children}
+
+      <a
+        className="fixed bottom-5 right-5 z-10 flex h-10 w-10 items-center justify-center rounded bg-white hover:bg-hot-pink"
+        href="https://github.com/lifeofcoding"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <BsGithub size={20} />
+      </a>
     </>
   );
 };
