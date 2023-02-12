@@ -4,7 +4,7 @@
 
 @layer components {
   nav.navbar {
-    @apply h-[50px] w-full bg-black bg-gradient-to-b from-[#2e026d] to-[#15162c];
+    @apply h-[50px] w-full bg-gradient-to-b from-[#15162c] to-[#2e026d];
   }
 
   nav.navbar [type="radio"] {
@@ -20,7 +20,7 @@
   }
 
   nav.navbar .nav-wrapper {
-    @apply relative flex h-0 flex-col justify-end overflow-hidden bg-gradient-to-b from-[#2e026d] to-[#15162c] opacity-0 md:h-auto md:flex-row md:bg-transparent md:opacity-100;
+    @apply relative flex h-0 flex-col justify-end overflow-hidden opacity-0 md:h-auto md:flex-row md:bg-transparent md:opacity-100;
     transition: all 0.5s ease-in-out;
     transform: translateY(10%);
   }

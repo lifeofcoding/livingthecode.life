@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         "hot-purple": "#2e026d",
         "hot-pink": "hsl(280,100%,70%)",
+        "transparent-black": "#00000080",
       },
     },
   },
