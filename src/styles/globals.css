@@ -43,4 +43,18 @@
   nav.navbar #about:checked ~ .nav-wrapper .nav-slider {
     right: 0;
   }
+
+  .under {
+    position: sticky;
+    top: 0;
+  }
+
+  .wrapper {
+    height: 200vh;
+  }
+
+  .over {
+    margin-top: -100vh;
+    position: relative;
+  }
 }
