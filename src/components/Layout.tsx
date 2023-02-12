@@ -45,7 +45,7 @@ const Layout = ({ children, router }: LayoutT) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="LivingTheCode.Life | LifeOfCoding | Software Engineer"
+          content="LivingTheCode.Life | Jimmy Rousseau (LifeOfCoding) | Software Engineer"
         />
         <meta name="author" content="Jimmy Rousseau" />
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -56,12 +56,13 @@ const Layout = ({ children, router }: LayoutT) => {
         <meta name="twitter:image" content="/card.png" />
         <meta
           property="og:site_name"
-          content="LivingTheCode.Life | LifeOfCoding | Software Engineer"
+          content="LivingTheCode.Life | Jimmy Rousseau (LifeOfCoding) | Software Engineer"
         />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="/card.png" />
         <title>
-          LivingTheCode.Life | LifeOfCoding | Software Engineer &copy;
+          LivingTheCode.Life | Jimmy Rousseau (LifeOfCoding) | Software Engineer
+          &copy;
         </title>
       </Head>
 
