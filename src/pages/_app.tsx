@@ -33,29 +33,29 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <Provider>
-        <div className="bg-hot-purple">
-          <Layout router={router}>
-            <AnimatePresence
-              mode="wait"
-              initial={true}
-              onExitComplete={() => {
-                if (typeof window !== "undefined") {
-                  window.scrollTo({ top: 0 });
-                  // document?.querySelector("#page-viewport")?.scrollTo({ top: 0 });
-                }
-              }}
-            >
-              <Component {...pageProps} key={router.route} />
-            </AnimatePresence>
-          </Layout>
-        </div>
-        {/* <Particles
-        id="tsparticles"
-        url="/particles.json"
-        init={particlesInit}
-        loaded={particlesLoaded}
-        className="relative z-0"
-      /> */}
+        {/* <div className="bg-hot-purple"> */}
+        <Layout router={router}>
+          <AnimatePresence
+            mode="wait"
+            initial={true}
+            onExitComplete={() => {
+              if (typeof window !== "undefined") {
+                window.scrollTo({ top: 0 });
+                // document?.querySelector("#page-viewport")?.scrollTo({ top: 0 });
+              }
+            }}
+          >
+            <Component {...pageProps} key={router.route} />
+          </AnimatePresence>
+        </Layout>
+        {/* </div> */}
+        <Particles
+          id="tsparticles"
+          url="/particles.json"
+          init={particlesInit}
+          loaded={particlesLoaded}
+          className="relative z-[-1]"
+        />
       </Provider>
     </SessionProvider>
   );
