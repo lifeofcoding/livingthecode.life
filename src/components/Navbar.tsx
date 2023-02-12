@@ -1,12 +1,23 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 type NavbarT = { path: string };
 
 const Navbar = ({ path }: NavbarT) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
   const toggleMenu = () => {
     setMenuOpen((curr) => !curr);
+    if (menuRef.current) {
+      menuRef.current.focus();
+    }
+  };
+
+  const onBlur = () => {
+    if (menuOpen) {
+      // Work around: If we close menu too soon link click action is not triggered
+      setTimeout(() => setMenuOpen(false), 0);
+    }
   };
 
   return (
@@ -62,7 +73,12 @@ const Navbar = ({ path }: NavbarT) => {
             checked={path === "/about"}
           />
 
-          <div className={menuOpen ? "nav-wrapper open" : "nav-wrapper"}>
+          <div
+            className={menuOpen ? "nav-wrapper open" : "nav-wrapper"}
+            onBlur={onBlur}
+            ref={menuRef}
+            tabIndex={-1}
+          >
             <Link href="/" className="nav-item">
               <label htmlFor="home">Home</label>
             </Link>

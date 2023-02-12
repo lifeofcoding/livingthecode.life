@@ -27,7 +27,7 @@
 
   nav.navbar .nav-wrapper.open {
     transform: translateY(0);
-    @apply h-auto opacity-100;
+    @apply h-auto bg-gradient-to-b from-[#2e026d] to-[#15162c] opacity-100;
   }
 
   nav.navbar .nav-slider {
