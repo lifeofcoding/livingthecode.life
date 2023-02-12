@@ -45,7 +45,7 @@ const Home: NextPage = () => {
           </div> */}
           </div>
         </div>
-        <div className="over min-h-screen w-full bg-black/50 text-center text-white">
+        <div className="relative mt-[-100vh] min-h-screen w-full bg-black/50 text-center text-white">
           <div className="m-2">
             <h1 className="mb-5 text-2xl">Showcase</h1>
 
