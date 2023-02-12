@@ -1,7 +1,7 @@
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import { AnimatePresence } from "framer-motion";
@@ -18,6 +18,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
   router,
 }) => {
+  const [loaded, setLoaded] = useState(false);
   const particlesInit = useCallback(async (engine: Engine) => {
     console.log(engine);
     // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
@@ -27,28 +28,32 @@ const MyApp: AppType<{ session: Session | null }> = ({
   }, []);
 
   const particlesLoaded = useCallback(async (container?: Container) => {
-    await console.log(container);
+    setLoaded(true);
   }, []);
 
   return (
     <SessionProvider session={session}>
       <Provider>
-        {/* <div className="bg-hot-purple"> */}
-        <Layout router={router}>
-          <AnimatePresence
-            mode="wait"
-            initial={true}
-            onExitComplete={() => {
-              if (typeof window !== "undefined") {
-                window.scrollTo({ top: 0 });
-                // document?.querySelector("#page-viewport")?.scrollTo({ top: 0 });
-              }
-            }}
-          >
-            <Component {...pageProps} key={router.route} />
-          </AnimatePresence>
-        </Layout>
-        {/* </div> */}
+        <div
+          className={`transition-colors ${
+            loaded ? "bg-transparent" : "bg-hot-purple"
+          }`}
+        >
+          <Layout router={router}>
+            <AnimatePresence
+              mode="wait"
+              initial={true}
+              onExitComplete={() => {
+                if (typeof window !== "undefined") {
+                  window.scrollTo({ top: 0 });
+                  // document?.querySelector("#page-viewport")?.scrollTo({ top: 0 });
+                }
+              }}
+            >
+              <Component {...pageProps} key={router.route} />
+            </AnimatePresence>
+          </Layout>
+        </div>
         <Particles
           id="tsparticles"
           url="/particles.json"

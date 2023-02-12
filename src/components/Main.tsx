@@ -40,7 +40,7 @@ const Main = ({ children, title = "" }: MainT) => {
       <Head>
         <title>
           LivingTheCode.Life | Jimmy Rousseau (LifeOfCoding) | Software Engineer
-          | {title}
+          |
         </title>
         <meta
           name="description"

@@ -51,9 +51,9 @@ const Navbar = ({ path }: NavbarT) => {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               ></path>
             </svg>
           </button>
@@ -66,6 +66,7 @@ const Navbar = ({ path }: NavbarT) => {
             id="home"
             name="nav-link"
             checked={path === "/"}
+            readOnly
           />
           <input
             type="radio"
@@ -73,6 +74,7 @@ const Navbar = ({ path }: NavbarT) => {
             id="projects"
             name="nav-link"
             checked={path === "/projects"}
+            readOnly
           />
           <input
             type="radio"
@@ -80,6 +82,7 @@ const Navbar = ({ path }: NavbarT) => {
             id="about"
             name="nav-link"
             checked={path === "/about"}
+            readOnly
           />
 
           <div
