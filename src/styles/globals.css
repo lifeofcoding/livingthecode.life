@@ -31,7 +31,7 @@
   }
 
   nav.navbar .nav-slider {
-    @apply absolute bottom-0 z-0 hidden h-[90%] w-2/12 rounded border-b-2 border-b-[hsl(280,100%,70%)] bg-[#15162c] md:block;
+    @apply absolute bottom-0 z-0 hidden h-[90%] w-2/12 rounded border-b-2 border-b-hot-pink bg-[#15162c] md:block;
     transition: right linear 0.5s;
     right: calc(16.6% * 2);
   }

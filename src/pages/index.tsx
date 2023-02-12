@@ -13,7 +13,7 @@ const Home: NextPage = () => {
       <main className="relative z-10 flex min-h-screen flex-col items-center justify-center">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-            Hi, I'm Life<span className="text-[hsl(280,100%,70%)]">Of</span>
+            Hi, I&apos;m Life<span className="text-hot-pink">Of</span>
             Coding
           </h1>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">

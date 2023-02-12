@@ -63,21 +63,15 @@ const Navbar = ({ path }: NavbarT) => {
           />
 
           <div className={menuOpen ? "nav-wrapper open" : "nav-wrapper"}>
-            <div className="nav-item">
-              <Link href="/">
-                <label htmlFor="home">Home</label>
-              </Link>
-            </div>
-            <div className="nav-item">
-              <Link href="/projects">
-                <label htmlFor="projects">Projects</label>
-              </Link>
-            </div>
-            <div className="nav-item">
-              <Link href="/about">
-                <label htmlFor="about">About</label>
-              </Link>
-            </div>
+            <Link href="/" className="nav-item">
+              <label htmlFor="home">Home</label>
+            </Link>
+            <Link href="/projects" className="nav-item">
+              <label htmlFor="projects">Projects</label>
+            </Link>
+            <Link href="/about" className="nav-item">
+              <label htmlFor="about">About</label>
+            </Link>
             <div className="nav-slider"></div>
           </div>
         </div>
