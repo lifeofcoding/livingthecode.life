@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useRef } from "react";
 
 type NavbarT = { path: string };
@@ -24,8 +25,16 @@ const Navbar = ({ path }: NavbarT) => {
     <nav className="navbar sticky top-0 z-20">
       <div className="container mx-auto flex flex-wrap items-center justify-between">
         <div className="m-2 flex items-center text-white">
+          <div className="mr-2">
+            <Image
+              src="/binary-code.png"
+              alt="LifeTheCode.Life Logo"
+              width={15}
+              height={15}
+            />
+          </div>
           <span className="text-md font-semibold tracking-tight">
-            LivingTheCode.Life
+            LivingTheCode<span className="text-hot-pink">.</span>Life
           </span>
         </div>
 
