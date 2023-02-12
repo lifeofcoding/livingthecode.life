@@ -43,7 +43,10 @@ const Layout = ({ children, router }: LayoutT) => {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="QDMeds" />
+        <meta
+          name="description"
+          content="LivingTheCode.Life | LifeOfCoding | Software Engineer"
+        />
         <meta name="author" content="Jimmy Rousseau" />
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
@@ -51,10 +54,15 @@ const Layout = ({ children, router }: LayoutT) => {
         <meta name="twitter:site" content="@QDMeds" />
         <meta name="twitter:creator" content="@QDMeds" />
         <meta name="twitter:image" content="/card.png" />
-        <meta property="og:site_name" content="QDMeds" />
+        <meta
+          property="og:site_name"
+          content="LivingTheCode.Life | LifeOfCoding | Software Engineer"
+        />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="/card.png" />
-        <title>LivingTheCode.Life &copy;</title>
+        <title>
+          LivingTheCode.Life | LifeOfCoding | Software Engineer &copy;
+        </title>
       </Head>
 
       <Navbar path={router.asPath} />

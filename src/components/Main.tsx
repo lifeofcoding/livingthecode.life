@@ -39,11 +39,11 @@ const Main = ({ children, title = "" }: MainT) => {
     <>
       <Head>
         <title>
-          LivingTheCode.Life | LifeOfCoding (Jimmy Rousseau) | {title}
+          LivingTheCode.Life | LifeOfCoding | Jimmy Rousseau | {title}
         </title>
         <meta
           name="description"
-          content="LivingTheCode.life Jimmy Rousseau software engineer."
+          content="LivingTheCode.Life | LifeOfCoding | Software Engineer"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
