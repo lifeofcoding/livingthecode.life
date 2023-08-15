@@ -21,20 +21,20 @@ export default function About() {
               My Name is Jimmy Rousseau, I first discovered the web in the last
               90s during the height of AOL 4.0, I remember, they would mail free
               trials CDs to everyone. I was obsessed with this idea of a digital
-              world that connects everyone, and the concept of "my space"
-              online. I came from a single parent home, If I wanted a computer
-              for awhile I had to build it from parts.. and install a free linux
-              distro online to use, also internet wasn't always a luxury we
-              could afford. At first I would spend most of my days at the public
-              library working on my Dragon Ball Z website, hosted on AngelFire
-              and GeoCities. Later, my first exploit I discovered was that
-              during AOL's sign up process, they would connect you online, you
-              were unable to use their browser, but you could use a key combo to
-              minimize it, and open another browser to use the internet. I would
-              spend days downloading Macromedia (later Adobe) Dreamweaver to
-              work on my personal Drang Ball Z website. I have been working on
-              the web, with a passion since I was a kid, and feel very blessed
-              to love what I do. Make sure to check me out on{" "}
+              world that connects everyone, and the concept of &quot;my
+              space&quot; online. I came from a single parent home, If I wanted
+              a computer for awhile I had to build it from parts.. and install a
+              free linux distro online to use, also internet wasn&apos;t always
+              a luxury we could afford. At first I would spend most of my days
+              at the public library working on my Dragon Ball Z website, hosted
+              on AngelFire and GeoCities. Later, my first exploit I discovered
+              was that during AOL&apos;s sign up process, they would connect you
+              online, you were unable to use their browser, but you could use a
+              key combo to minimize it, and open another browser to use the
+              internet. I would spend days downloading Macromedia (later Adobe)
+              Dreamweaver to work on my personal Drang Ball Z website. I have
+              been working on the web, with a passion since I was a kid, and
+              feel very blessed to love what I do. Make sure to check me out on{" "}
               <a
                 href="https://www.kaggle.com/lifeofcoding"
                 target="_blank"

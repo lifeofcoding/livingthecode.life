@@ -1,7 +1,24 @@
 import { BackgroundCircles } from "@/components/BackgroundCircles";
 import { Header } from "../components/Header";
 import Link from "next/link";
+import { db } from "@/lib/db";
 export default async function Home() {
+  const lastestArticles = await db.article.findMany({
+    take: 5,
+    orderBy: {
+      createdAt: "desc",
+    },
+    select: {
+      id: true,
+      title: true,
+      categories: {
+        take: 1,
+      },
+    },
+  });
+  const getCategory = (article: (typeof lastestArticles)[0]) => {
+    return article.categories[0].title.replaceAll(" ", "-");
+  };
   return (
     <main className="flex min-h-screen flex-col items-center">
       <Header />
@@ -38,10 +55,21 @@ export default async function Home() {
       </div>
 
       <div className="relative mt-[-100vh] min-h-screen w-full bg-black/50 text-center text-white">
-        <div className="m-2 container">
+        <div className="m-2 container ml-auto mr-auto">
           <h1 className="mb-5 text-2xl">Recent Articles</h1>
 
-          <div className="mt-2 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div>
+            {lastestArticles.map((article) => (
+              <div key={article.id} className="mb-5">
+                <Link
+                  href={`/categories/${getCategory(article)}/${article.id}`}
+                >
+                  {article.title}
+                </Link>
+              </div>
+            ))}
+          </div>
+          {/* <div className="mt-2 grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="group relative border border-red-400">
               <a
                 href="https://github.com/lifeofcoding/desktop-chatgpt"
@@ -64,17 +92,8 @@ export default async function Home() {
                 </div>
               </a>
             </div>
-          </div>
+          </div> */}
         </div>
-      </div>
-      <div className="container">
-        <section className="z-10 mt-10 border border-red-500 bg-black relative">
-          <div>
-            <a href="http://localhost:3000/api/auth/signin/google?callbackUrl=/categories">
-              Login with Google
-            </a>
-          </div>
-        </section>
       </div>
     </main>
   );
