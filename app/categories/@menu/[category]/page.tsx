@@ -1,0 +1,43 @@
+import { db } from "@lib/db";
+import Link from "next/link";
+
+export default async function Page({
+  params,
+}: {
+  params: { category: string };
+}) {
+  const articles = await db.article.findMany({
+    where: {
+      categories: {
+        some: {
+          title: { contains: params.category.replaceAll("-", " ") },
+        },
+      },
+    },
+    select: {
+      id: true,
+      title: true,
+      categories: {
+        take: 1,
+      },
+    },
+  });
+  const getCategory = (article: (typeof articles)[0]) => {
+    return article.categories[0].title.replaceAll(" ", "-");
+  };
+  return (
+    <>
+      Articles:
+      {articles.map((article) => (
+        <div
+          key={article.id}
+          className="flex items-center justify-between p-2 text-sm font-semibold text-gray-400  rounded-md cursor-pointer hover:bg-gray-100"
+        >
+          <Link href={`/categories/${getCategory(article)}/${article.id}`}>
+            {article.title}
+          </Link>
+        </div>
+      ))}
+    </>
+  );
+}

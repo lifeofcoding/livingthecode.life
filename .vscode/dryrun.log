@@ -1,6 +1,0 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/home/jimmyrousseau/Projects/nextjs-shakra'
-docker build --cpuset-cpus="1" --memory="1g" -t houseofmeds-web-repo:0.0.1 .
-docker tag houseofmeds-web-repo:0.0.1 houseofmeds-web-repo:latest
-make: Leaving directory `/home/jimmyrousseau/Projects/nextjs-shakra'
- 
