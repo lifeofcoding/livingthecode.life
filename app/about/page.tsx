@@ -11,7 +11,7 @@ export default function About() {
             <div>
               <Image
                 className="rounded-md mt-0 ml-auto mr-auto mb-2"
-                src="/me.jpeg"
+                src="/me.jpg"
                 width={400}
                 height={400}
                 alt="LifeOfCoding -  Jimmy Rousseau"
