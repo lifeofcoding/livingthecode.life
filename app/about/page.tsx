@@ -1,5 +1,5 @@
 import { PageCirclesHero } from "@/components/PageCirclesHero";
-import Image from "next/image";
+// import Image from "next/image";
 export default function About() {
   return (
     <main className="flex min-h-screen flex-col items-center relative">
@@ -9,13 +9,21 @@ export default function About() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-[420px_minmax(0,1fr)]">
             <div>
-              <Image
+              {/* <Image
                 className="rounded-md mt-0 ml-auto mr-auto mb-2"
                 src="/me.jpg"
                 width={400}
                 height={400}
                 alt="LifeOfCoding -  Jimmy Rousseau"
-              />
+              /> */}
+              <div className="rounded-md mt-0 ml-auto mr-auto mb-2">
+                <img
+                  src="/me.jpg"
+                  width="auto"
+                  className="object-contain rounded-md mt-0 ml-auto mr-auto mb-2"
+                  alt="LifeOfCoding | Jimmy Rousseau"
+                />
+              </div>
             </div>
             <div>
               My Name is Jimmy Rousseau, I first discovered the web in the last

@@ -1,4 +1,3 @@
-import { BackgroundCircles } from "@/components/BackgroundCircles";
 import { PageCirclesHero } from "@/components/PageCirclesHero";
 import { db } from "@/lib/db";
 import Link from "next/link";
@@ -6,6 +5,7 @@ export default async function Categories() {
   const categories = await db.category.findMany({
     take: 10,
   });
+
   return (
     <main className="flex min-h-screen flex-col items-center relative">
       <PageCirclesHero title="Categories" />
