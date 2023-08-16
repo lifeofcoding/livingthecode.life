@@ -1,4 +1,5 @@
 import { PageCirclesHero } from "@/components/PageCirclesHero";
+import { Skeleton } from "@/components/ui/skeleton";
 export default function Loading({
   params,
 }: {
@@ -9,9 +10,7 @@ export default function Loading({
       <PageCirclesHero title={`Search For ${params.searchTerms}`} />
 
       <section className="w-full">
-        <div className="grid md:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-4">
-          Loading...
-        </div>
+        <Skeleton className="w-full h-48" />
       </section>
     </main>
   );

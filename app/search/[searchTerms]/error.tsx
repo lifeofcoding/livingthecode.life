@@ -1,3 +1,4 @@
+"use client";
 import { PageCirclesHero } from "@/components/PageCirclesHero";
 export default function ErrorPage({
   params,
