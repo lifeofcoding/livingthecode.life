@@ -2,8 +2,6 @@ import { Header } from "@components/Header";
 
 import { Suspense } from "react";
 
-import { ChevronLeftSquare } from "lucide-react";
-
 export default async function CategoriesLayout({
   children, // will be a page or nested layout
   menu, // will be a component
