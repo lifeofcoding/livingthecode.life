@@ -16,6 +16,7 @@ export default async function Categories({
         mode: "insensitive",
       },
     },
+    take: 1,
   });
 
   if (category.length === 0) {
