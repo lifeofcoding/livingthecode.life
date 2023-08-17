@@ -22,7 +22,9 @@ export function Markdown({ children }: { children: string }) {
         h6: ({ children }) => (
           <h6 className="text-base font-semibold mb-2">{children}</h6>
         ),
-        p: ({ children }) => <p className="text-base py-3">{children}</p>,
+        p: ({ children }) => (
+          <div className="text-base py-3 whitespace-pre-line">{children}</div>
+        ),
         a: ({ children, href }) => (
           <a className="text-base text-blue-500" href={href}>
             {children}
@@ -38,7 +40,11 @@ export function Markdown({ children }: { children: string }) {
         blockquote: ({ children }) => (
           <blockquote className="text-base">{children}</blockquote>
         ),
-        code: ({ children }) => <code className="text-base">{children}</code>,
+        code: ({ children }) => (
+          <div className="border border-foreground p-5">
+            <pre className="text-base whitespace-break-spaces">{children}</pre>
+          </div>
+        ),
         pre: ({ children }) => <pre className="text-base">{children}</pre>,
         img: ({ children, src, alt }) => (
           <img src={src} alt={alt} width="100%" height="auto" />

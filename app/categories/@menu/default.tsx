@@ -13,8 +13,8 @@ export default async function Page() {
     },
   });
   return (
-    <>
-      Categories:
+    <div className="pt-2 space-y-1">
+      <div className="text-foreground mb-2">Categories:</div>
       {categories.map((category) => (
         <div
           key={category.id}
@@ -28,6 +28,6 @@ export default async function Page() {
           </span>
         </div>
       ))}
-    </>
+    </div>
   );
 }

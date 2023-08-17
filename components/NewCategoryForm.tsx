@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Fragment, ReactNode } from "react";
 import type { Category } from "@prisma/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -111,6 +112,10 @@ export function NewCategoryForm({
                         <Textarea
                           placeholder="Type your content here."
                           {...field}
+                          onChange={(e) => {
+                            debugger;
+                            field.onChange(e);
+                          }}
                         />
                       </FormControl>
                       <FormDescription>Must be in markdown</FormDescription>

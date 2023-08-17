@@ -48,16 +48,19 @@ export default async function Page({ params }: PageParams) {
   }
 
   return (
-    <div className="">
+    <div className="relative">
       <div className="font-semibold text-5xl p-5 mt-10">{page.title}</div>
       <div className="p-5 bg-background border-foreground border rounded">
         Author: {page.author.name || page.author.email} | Published:{" "}
         {new Date(page.createdAt).toLocaleDateString()}
       </div>
-      <div className="article space-y-10 p-5">
+      <div className="article space-y-2 p-5">
         <Markdown>{page.content}</Markdown>
       </div>
-      <BackgroundCircles />
+
+      <div className="w-full fixed bottom-0 h-full z-[-1]">
+        <BackgroundCircles />
+      </div>
     </div>
   );
 }
