@@ -164,7 +164,9 @@ export function NewArticleForm({
                 />
               </CardContent>
               <CardFooter>
-                <Button type="submit">Submit</Button>
+                <Button type="submit" disabled={form.formState.isSubmitting}>
+                  {form.formState.isSubmitting ? "Submitting..." : "Submit"}
+                </Button>
               </CardFooter>
             </form>
           </Form>

@@ -26,8 +26,8 @@ export default async function Page({
     return article.categories[0].title.replaceAll(" ", "-");
   };
   return (
-    <>
-      Articles:
+    <div className="pt-2 space-y-1">
+      <div className="text-foreground mb-2">Articles:</div>
       {articles.map((article) => (
         <div
           key={article.id}
@@ -38,6 +38,6 @@ export default async function Page({
           </Link>
         </div>
       ))}
-    </>
+    </div>
   );
 }

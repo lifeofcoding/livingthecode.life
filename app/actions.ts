@@ -2,6 +2,7 @@
 
 import { db } from "@/lib/db";
 import { getCurrentUser } from "@/lib/session";
+import { revalidatePath } from "next/cache";
 
 export async function addArticle({
   content,
@@ -34,6 +35,8 @@ export async function addArticle({
       },
     });
 
+    revalidatePath("/categories");
+
     return result;
   } catch (e) {
     console.log(e);
@@ -55,6 +58,8 @@ export async function addCategory({
         content,
       },
     });
+
+    revalidatePath("/categories");
 
     return result;
   } catch (e) {

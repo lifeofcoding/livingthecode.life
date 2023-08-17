@@ -113,7 +113,6 @@ export function NewCategoryForm({
                           placeholder="Type your content here."
                           {...field}
                           onChange={(e) => {
-                            debugger;
                             field.onChange(e);
                           }}
                         />
@@ -130,7 +129,9 @@ export function NewCategoryForm({
                 />
               </CardContent>
               <CardFooter>
-                <Button type="submit">Submit</Button>
+                <Button type="submit" disabled={form.formState.isSubmitting}>
+                  {form.formState.isSubmitting ? "Submitting..." : "Submit"}
+                </Button>
               </CardFooter>
             </form>
           </Form>
