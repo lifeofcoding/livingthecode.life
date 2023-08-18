@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/session";
 
-import { NewArticleForm } from "@/components/NewArticleForm";
+import { EditCategoryForm } from "@/components/EditCategoryForm";
 import { db } from "@/lib/db";
 import { PageHero } from "@/components/PageHero";
 
-export async function NewArticle({ category }: { category: string }) {
+export async function EditCategory({ category }: { category: string }) {
   const user = await getCurrentUser();
 
   if (!user || !user.isAdmin) {
@@ -27,24 +27,19 @@ export async function NewArticle({ category }: { category: string }) {
       },
     },
     take: 1,
-    select: {
-      id: true,
-    },
   });
 
-  let categoryId = 0;
-  if (result.length) {
-    categoryId = result[0].id;
+  if (result.length === 0) {
+    return notFound();
   }
+
+  const data = result[0];
   return (
     <main className="flex min-h-screen min-w-full flex-col items-center">
-      <PageHero title="New Article" />
+      <PageHero title="Edit Category" />
 
       <section className="w-full">
-        <NewArticleForm
-          categories={categories}
-          currentCategoryId={categoryId}
-        />
+        <EditCategoryForm categories={categories} data={data} />
       </section>
     </main>
   );

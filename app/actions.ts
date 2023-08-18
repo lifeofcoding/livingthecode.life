@@ -67,3 +67,70 @@ export async function addCategory({
     return null;
   }
 }
+
+export async function editCategory({
+  id,
+  title,
+  content,
+}: {
+  id: number;
+  title: string;
+  content: string;
+}) {
+  try {
+    const result = await db.category.update({
+      where: {
+        id,
+      },
+      data: {
+        title,
+        content,
+      },
+    });
+
+    revalidatePath("/categories");
+
+    return result;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+}
+
+export async function editArticle({
+  id,
+  title,
+  content,
+  category,
+}: {
+  id: number;
+  title: string;
+  content: string;
+  category: string;
+}) {
+  try {
+    const result = await db.article.update({
+      where: {
+        id,
+      },
+      data: {
+        title,
+        content,
+        categories: {
+          connect: [{ id: Number(category) }],
+        },
+      },
+      select: {
+        id: true,
+        categories: true,
+      },
+    });
+
+    revalidatePath("/categories");
+
+    return result;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+}

@@ -3,6 +3,8 @@ import { NewCategory } from "./NewCategory";
 import { Category } from "./Category";
 import { NewArticle } from "./NewArticle";
 import { Article } from "./Article";
+import { EditCategory } from "./EditCategory";
+import { EditArticle } from "./EditArticle";
 
 export async function generateMetadata({
   params,
@@ -28,6 +30,11 @@ export async function generateMetadata({
   if (article == "new") {
     return {
       title: "LivingTheCode.Life | New Article",
+      description: "A blog about living the code life.",
+    };
+  } else if (article == "edit") {
+    return {
+      title: "LivingTheCode.Life | Edit Article",
       description: "A blog about living the code life.",
     };
   } else {
@@ -58,7 +65,7 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
-  const [category, article] = params.slug;
+  const [category, article, editArticleFlag] = params.slug;
 
   if (category == "new") {
     return <NewCategory />;
@@ -68,9 +75,19 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
     return <Category category={category} />;
   }
 
+  if (article == "edit") {
+    return <EditCategory category={category} />;
+  }
+
   if (article == "new") {
     return <NewArticle category={category} />;
-  } else {
-    return <Article article={article} />;
   }
+
+  /// above is perfect
+
+  if (editArticleFlag == "edit") {
+    return <EditArticle article={article} />;
+  }
+
+  return <Article article={article} />;
 }

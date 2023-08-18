@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { ChangeEvent, useLayoutEffect, useRef } from "react";
 import type { Category } from "@prisma/client";
-import { ChangeEvent, useRef } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -35,10 +35,11 @@ import {
 } from "@/components/ui/card";
 
 import { useRouter } from "next/navigation";
-import { addArticle } from "@/app/actions";
+import { editArticle } from "@/app/actions";
 import { Markdown } from "@/lib/markdown";
 
 const formSchema = z.object({
+  id: z.number(),
   title: z.string().min(5, {
     message: "Title must be at least 5 characters.",
   }),
@@ -50,27 +51,36 @@ const formSchema = z.object({
   }),
 });
 
-export function NewArticleForm({
+export function EditArticleForm({
   categories,
-  currentCategoryId,
+  data,
 }: {
   categories: Partial<Category>[];
-  currentCategoryId: number;
+  data: {
+    title: string;
+    content: string;
+    categories: {
+      id: number;
+    }[];
+    id: number;
+  };
 }) {
   const router = useRouter();
   // 1. Define your form.
+  const categoryId = data.categories[0].id;
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
-      content: "",
-      category: `${currentCategoryId}`,
+      id: data.id,
+      title: data.title,
+      content: data.content,
+      category: `${categoryId}`,
     },
   });
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const result = await addArticle(values);
+    const result = await editArticle(values);
 
     if (result) {
       const firstCategory = result.categories[0];
@@ -94,6 +104,14 @@ export function NewArticleForm({
     };
   };
 
+  useLayoutEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height =
+        textareaRef.current.scrollHeight + "px";
+    }
+  }, [textareaRef]);
+
   return (
     <div className="grid grid-cols-2">
       <div className="p-5 overflow-x-auto">
@@ -102,8 +120,8 @@ export function NewArticleForm({
       <div>
         <Card>
           <CardHeader>
-            <CardTitle>New Article</CardTitle>
-            <CardDescription>Add a new article</CardDescription>
+            <CardTitle>Edit Article</CardTitle>
+            <CardDescription>Edit an existing article</CardDescription>
           </CardHeader>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

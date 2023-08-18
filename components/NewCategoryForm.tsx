@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { Fragment, ReactNode } from "react";
+import { ChangeEvent, useRef } from "react";
 import type { Category } from "@prisma/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -74,6 +73,18 @@ export function NewCategoryForm({
 
   const watchContent = form.watch("content");
 
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const generateOnChangeEvent = (onChange: (...event: any[]) => void) => {
+    return (event: ChangeEvent<HTMLTextAreaElement>) => {
+      onChange(event);
+      if (textareaRef.current) {
+        textareaRef.current.style.height =
+          textareaRef.current.scrollHeight + "px";
+      }
+    };
+  };
+
   return (
     <div className="grid grid-cols-2">
       <div className="p-5 overflow-x-auto">
@@ -112,8 +123,10 @@ export function NewCategoryForm({
                         <Textarea
                           placeholder="Type your content here."
                           {...field}
-                          onChange={(e) => {
-                            field.onChange(e);
+                          onChange={generateOnChangeEvent(field.onChange)}
+                          ref={(e) => {
+                            field.ref(e);
+                            textareaRef.current = e;
                           }}
                         />
                       </FormControl>
