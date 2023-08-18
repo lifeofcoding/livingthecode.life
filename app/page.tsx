@@ -2,6 +2,9 @@ import { BackgroundCircles } from "@/components/BackgroundCircles";
 import { Header } from "../components/Header";
 import Link from "next/link";
 import { db } from "@/lib/db";
+
+export const revalidate = 60 * 60; //1 hour
+
 export default async function Home() {
   const lastestArticles = await db.article.findMany({
     take: 5,
