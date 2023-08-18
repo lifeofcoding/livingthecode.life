@@ -1,3 +1,4 @@
-import Page from "./default";
-
-export default Page;
+import { Categories } from "./Categories";
+export default async function Page() {
+  return <Categories />;
+}
