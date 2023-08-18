@@ -3,6 +3,7 @@ import { Header } from "../components/Header";
 import Link from "next/link";
 import { db } from "@/lib/db";
 
+// https://stackoverflow.com/questions/74379563/next-js-13-why-isnt-my-root-page-dynamic
 export const revalidate = 60 * 60; //1 hour
 
 export default async function Home() {

@@ -26,7 +26,7 @@ export function Markdown({ children }: { children: string }) {
           <div className="text-base py-3 whitespace-pre-line">{children}</div>
         ),
         a: ({ children, href }) => (
-          <a className="text-base text-blue-500" href={href}>
+          <a className="text-base text-blue-500" target="_blank" href={href}>
             {children}
           </a>
         ),
