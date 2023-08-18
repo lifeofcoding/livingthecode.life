@@ -5,22 +5,22 @@ export function Markdown({ children }: { children: string }) {
     <ReactMarkdown
       components={{
         h1: ({ children }) => (
-          <h1 className="text-4xl font-semibold mb-2">{children}</h1>
+          <h1 className="text-4xl font-semibold pt-5">{children}</h1>
         ),
         h2: ({ children }) => (
-          <h2 className="text-3xl font-semibold mb-2">{children}</h2>
+          <h2 className="text-3xl font-semibold pt-5">{children}</h2>
         ),
         h3: ({ children }) => (
-          <h3 className="text-2xl font-semibold mb-2">{children}</h3>
+          <h3 className="text-2xl font-semibold pt-5">{children}</h3>
         ),
         h4: ({ children }) => (
-          <h4 className="text-xl font-semibold mb-2">{children}</h4>
+          <h4 className="text-xl font-semibold pt-5">{children}</h4>
         ),
         h5: ({ children }) => (
-          <h5 className="text-lg font-semibold mb-2">{children}</h5>
+          <h5 className="text-lg font-semibold pt-5">{children}</h5>
         ),
         h6: ({ children }) => (
-          <h6 className="text-base font-semibold mb-2">{children}</h6>
+          <h6 className="text-base font-semibold pt-5">{children}</h6>
         ),
         p: ({ children }) => (
           <div className="text-base py-3 whitespace-pre-line">{children}</div>
@@ -41,7 +41,7 @@ export function Markdown({ children }: { children: string }) {
           <blockquote className="text-base">{children}</blockquote>
         ),
         code: ({ children }) => (
-          <div className="border border-foreground p-5">
+          <div className="border border-foreground/40 bg-black/60 p-5">
             <pre className="text-base whitespace-break-spaces">{children}</pre>
           </div>
         ),

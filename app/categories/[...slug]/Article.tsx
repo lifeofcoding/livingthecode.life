@@ -25,12 +25,12 @@ export async function Article({ article }: { article: string }) {
 
   return (
     <div className="relative">
-      <div className="font-semibold text-5xl p-5 mt-10">{page.title}</div>
-      <div className="p-5 bg-background border-foreground border rounded">
+      <div className="font-semibold text-5xl p-5 mb-5 mt-10">{page.title}</div>
+      <div className="m-5 p-2 bg-background border-foreground border rounded">
         Author: {page.author.name || page.author.email} | Published:{" "}
         {new Date(page.createdAt).toLocaleDateString()}
       </div>
-      <div className="article space-y-2 p-5">
+      <div className="article p-5">
         <Markdown>{page.content}</Markdown>
       </div>
 
