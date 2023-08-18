@@ -27,7 +27,7 @@ export default async function NewArticle() {
       </div>
 
       <section className="w-full">
-        <NewArticleForm categories={categories} />
+        <NewArticleForm categories={categories} currentCategoryId={0} />
       </section>
     </main>
   );
