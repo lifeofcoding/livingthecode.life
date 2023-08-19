@@ -103,13 +103,12 @@ export async function editArticle({
   id,
   title,
   content,
-  category,
+
   categories,
 }: {
   id: number;
   title: string;
   content: string;
-  category: string;
   categories: number[];
 }) {
   const connectCatgeories = categories.map((id) => ({ id }));

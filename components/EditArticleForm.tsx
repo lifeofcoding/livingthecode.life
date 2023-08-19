@@ -74,7 +74,6 @@ export function EditArticleForm({
 }) {
   const router = useRouter();
   // 1. Define your form.
-  const categoryId = data.categories[0].id;
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
