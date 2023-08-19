@@ -7,11 +7,11 @@ import { revalidatePath } from "next/cache";
 export async function addArticle({
   content,
   title,
-  category,
+  categories,
 }: {
   content: string;
   title: string;
-  category: string;
+  categories: number[];
 }) {
   try {
     const user = await getCurrentUser();
@@ -20,13 +20,15 @@ export async function addArticle({
       throw new Error("Unknown user tried creating an article.");
     }
 
+    const connectCatgeories = categories.map((id) => ({ id }));
+
     const result = await db.article.create({
       data: {
         title,
         content,
         authorId: user.id,
         categories: {
-          connect: [{ id: Number(category) }],
+          connect: connectCatgeories,
         },
       },
       select: {
@@ -102,12 +104,15 @@ export async function editArticle({
   title,
   content,
   category,
+  categories,
 }: {
   id: number;
   title: string;
   content: string;
   category: string;
+  categories: number[];
 }) {
+  const connectCatgeories = categories.map((id) => ({ id }));
   try {
     const result = await db.article.update({
       where: {
@@ -117,7 +122,8 @@ export async function editArticle({
         title,
         content,
         categories: {
-          connect: [{ id: Number(category) }],
+          // connect: [{ id: Number(category) }], // Just connected new categories and doesn't remove existing ones
+          set: connectCatgeories,
         },
       },
       select: {

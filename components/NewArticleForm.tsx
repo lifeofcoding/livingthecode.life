@@ -15,16 +15,23 @@ import {
   FormMessage,
   FormControl,
 } from "@/components/ui/form";
+import { cn } from "@/lib/utils";
+import { Check, ChevronsUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   Card,
   CardContent,
@@ -45,8 +52,8 @@ const formSchema = z.object({
   content: z.string().min(10, {
     message: "Content must be at least 10 characters.",
   }),
-  category: z.string().nonempty({
-    message: "Category must be selected.",
+  categories: z.number().array().nonempty({
+    message: "At least one category must be selected.",
   }),
 });
 
@@ -54,7 +61,7 @@ export function NewArticleForm({
   categories,
   currentCategoryId,
 }: {
-  categories: Partial<Category>[];
+  categories: Partial<Category> & { id: number; title: string }[];
   currentCategoryId: number;
 }) {
   const router = useRouter();
@@ -64,7 +71,7 @@ export function NewArticleForm({
     defaultValues: {
       title: "",
       content: "",
-      category: `${currentCategoryId}`,
+      categories: [currentCategoryId],
     },
   });
 
@@ -94,6 +101,12 @@ export function NewArticleForm({
     };
   };
 
+  function isChecked(categoryId: number) {
+    return form.watch("categories").includes(categoryId);
+  }
+
+  const currentCategories = form.watch("categories");
+
   return (
     <div className="grid grid-cols-2">
       <div className="p-5 overflow-x-auto">
@@ -107,7 +120,7 @@ export function NewArticleForm({
           </CardHeader>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <CardContent>
+              <CardContent className="space-y-3">
                 <FormField
                   control={form.control}
                   name="title"
@@ -126,30 +139,90 @@ export function NewArticleForm({
                 />
                 <FormField
                   control={form.control}
-                  name="category"
+                  name="categories"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="flex flex-col">
                       <FormLabel>Category</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select a category for this article" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {categories.map((category) => (
-                            <SelectItem
-                              value={`${category.id}`}
-                              key={category.id}
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant="outline"
+                              role="combobox"
+                              className={cn(
+                                "w-[250px] justify-between",
+                                !field.value && "text-muted-foreground"
+                              )}
                             >
-                              {category.title}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                              <div className="overflow-hidden whitespace-nowrap text-ellipsis">
+                                {currentCategories.length
+                                  ? categories
+                                      .filter((category) =>
+                                        currentCategories.includes(category.id)
+                                      )
+                                      .map((category) => category.title)
+                                      .join(", ")
+                                  : "Select Categories"}
+                              </div>
+                              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-[250px] p-0">
+                          <Command>
+                            <CommandInput placeholder="Search framework..." />
+                            <CommandEmpty>No Category found.</CommandEmpty>
+                            <CommandGroup>
+                              {categories.map((category) => (
+                                <CommandItem
+                                  value={category.title}
+                                  key={category.id}
+                                  onSelect={() => {
+                                    const currentValues =
+                                      form.getValues("categories");
+
+                                    const hasValue = currentValues.includes(
+                                      category.id
+                                    );
+
+                                    if (hasValue) {
+                                      const values = currentValues.filter(
+                                        (value: number) => value !== category.id
+                                      );
+
+                                      if (values.length) {
+                                        form.setValue("categories", [
+                                          values[0],
+                                          ...values.slice(1),
+                                        ]);
+                                      }
+                                      return;
+                                    }
+
+                                    form.setValue("categories", [
+                                      ...currentValues,
+                                      category.id,
+                                    ]);
+                                  }}
+                                >
+                                  <Check
+                                    className={cn(
+                                      "mr-2 h-4 w-4",
+                                      isChecked(category.id)
+                                        ? "opacity-100"
+                                        : "opacity-0"
+                                    )}
+                                  />
+                                  {form
+                                    .getValues("categories")
+                                    .includes(category.id)}
+                                  {category.title}
+                                </CommandItem>
+                              ))}
+                            </CommandGroup>
+                          </Command>
+                        </PopoverContent>
+                      </Popover>
                       <FormDescription>
                         You can create a new category
                         <Link href="/categories/new">here</Link>.
