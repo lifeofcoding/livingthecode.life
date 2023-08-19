@@ -8,20 +8,30 @@ export const revalidate = 60 * 60; //1 hour
 
 export default async function Home() {
   const lastestArticles = await db.article.findMany({
-    take: 5,
+    take: 6,
     orderBy: {
       createdAt: "desc",
     },
     select: {
       id: true,
       title: true,
+      createdAt: true,
       categories: {
         take: 1,
+      },
+      author: {
+        select: {
+          name: true,
+          image: true,
+        },
       },
     },
   });
   const getCategory = (article: (typeof lastestArticles)[0]) => {
     return article.categories[0].title.replaceAll(" ", "-");
+  };
+  const getCategories = (article: (typeof lastestArticles)[0]) => {
+    return article.categories.map((category) => category.title).join(", ");
   };
   return (
     <main className="flex min-h-screen flex-col items-center">
@@ -58,45 +68,43 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="relative mt-[-100vh] min-h-screen w-full bg-black/50 text-center text-white">
+      <div className="relative mt-[-100vh] min-h-screen w-full bg-black/50 text-center text-white backdrop-blur-sm">
         <div className="m-2 container ml-auto mr-auto">
           <h1 className="mb-5 text-2xl">Recent Articles</h1>
 
-          <div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5">
             {lastestArticles.map((article) => (
-              <div key={article.id} className="mb-5">
-                <Link
-                  href={`/categories/${getCategory(article)}/${article.id}`}
-                >
+              <Link
+                href={`/categories/${getCategory(article)}/${article.id}`}
+                className="flex justify-center items-center border rounded-sm border-slate-800 aspect-square flex-col"
+                key={article.id}
+              >
+                <div className="w-full p-2 bg-white/50 dark:bg-black/50">
                   {article.title}
-                </Link>
-              </div>
+                </div>
+                <div className="flex-grow p-2 w-full flex justify-center items-center bg-white/40 dark:bg-black/30">
+                  <div className="text-xl">{getCategories(article)}</div>
+                </div>
+                <div className="flex justify-between w-full p-2 bg-white/50 dark:bg-black/50">
+                  {article.author.image ? (
+                    <div className="flex items-center">
+                      {/*  eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={article.author.image}
+                        alt={article.author.name}
+                        className="w-6 h-6 rounded-full mr-2"
+                      />
+                      <div>{article.author.name}</div>
+                    </div>
+                  ) : null}
+
+                  <div className="text-sm">
+                    {new Date(article.createdAt).toLocaleDateString()}
+                  </div>
+                </div>
+              </Link>
             ))}
           </div>
-          {/* <div className="mt-2 grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div className="group relative border border-red-400">
-              <a
-                href="https://github.com/lifeofcoding/desktop-chatgpt"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity group-hover:!opacity-100">
-                  <p>Desktop ChatGPT</p>
-                </div>
-              </a>
-            </div>
-            <div className="group relative border border-red-400">
-              <a
-                href="https://github.com/lifeofcoding/AutoNFT"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity group-hover:!opacity-100">
-                  <p>AutoNFT</p>
-                </div>
-              </a>
-            </div>
-          </div> */}
         </div>
       </div>
     </main>

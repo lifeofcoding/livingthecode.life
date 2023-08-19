@@ -21,7 +21,7 @@ export default async function Categories() {
               href={`/categories/${category.title.replaceAll(" ", "-")}`}
               key={category.id}
             >
-              <div className="border border-foreground rounded p-5 hover:bg-primary">
+              <div className="border rounded p-5 hover:bg-primary text-center">
                 {category.title}
               </div>
             </Link>

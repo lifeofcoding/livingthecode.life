@@ -28,14 +28,14 @@ export async function Articles({ category }: { category: string }) {
     <div className="pt-2 space-y-1">
       <div className="text-foreground mb-2">Articles:</div>
       {articles.map((article) => (
-        <div
+        <Link
+          href={`/categories/${getCategory(article)}/${article.id}`}
           key={article.id}
-          className="flex items-center justify-between p-2 text-sm font-semibold text-gray-400  rounded-md cursor-pointer hover:bg-gray-100"
         >
-          <Link href={`/categories/${getCategory(article)}/${article.id}`}>
+          <div className="flex items-center justify-between p-2 text-sm font-semibold text-gray-400  rounded-md cursor-pointer hover:bg-primary dark:hover:text-white">
             {article.title}
-          </Link>
-        </div>
+          </div>
+        </Link>
       ))}
     </div>
   );
