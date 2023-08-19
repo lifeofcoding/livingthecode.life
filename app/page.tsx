@@ -37,7 +37,7 @@ export default async function Home() {
     <main className="flex min-h-screen flex-col items-center">
       <Header />
 
-      <div className="container mt-[30vh] flex h-[200vh] flex-col items-center justify-start px-4 py-6">
+      <div className="container mt-[150px] md:mt-[200px] flex h-[200vh] flex-col items-center justify-start px-4 py-6">
         <div className="sticky top-20 flex flex-col items-center justify-center gap-12 px-4 py-6">
           <div className="page-bg-gradient absolute z-[-1]"></div>
           <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
@@ -76,16 +76,16 @@ export default async function Home() {
             {lastestArticles.map((article) => (
               <Link
                 href={`/categories/${getCategory(article)}/${article.id}`}
-                className="flex justify-center items-center border rounded-sm border-slate-800 aspect-square flex-col"
+                className="flex justify-center items-center border rounded-md border-slate-800 aspect-square flex-col group hover:border-primary overflow-hidden"
                 key={article.id}
               >
-                <div className="w-full p-2 bg-white/50 dark:bg-black/50">
+                <div className="w-full p-2 rounded-tl-md rounded-tr-md  transition-colors bg-white/50 group-hover:bg-white/80 dark:bg-black/50 group-hover:dark:bg-black/80">
                   {article.title}
                 </div>
-                <div className="flex-grow p-2 w-full flex justify-center items-center bg-white/40 dark:bg-black/30">
+                <div className="flex-grow p-2 w-full flex justify-center items-center transition-colors bg-white/30 group-hover:bg-white/60 dark:bg-black/30 group-hover:dark:bg-black/60">
                   <div className="text-xl">{getCategories(article)}</div>
                 </div>
-                <div className="flex justify-between w-full p-2 bg-white/50 dark:bg-black/50">
+                <div className="rounded-bl-md rounded-br-md flex justify-between w-full p-2 transition-colors bg-white/50 group-hover:bg-white/80 dark:bg-black/50 group-hover:dark:bg-black/80">
                   {article.author.image ? (
                     <div className="flex items-center">
                       {/*  eslint-disable-next-line @next/next/no-img-element */}
