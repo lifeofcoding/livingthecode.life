@@ -15,7 +15,7 @@ export async function Article({ article }: { article: string }) {
       title: true,
       content: true,
       author: {
-        select: { name: true, email: true, image: true },
+        select: { name: true, image: true },
       },
       createdAt: true,
     },
@@ -29,17 +29,19 @@ export async function Article({ article }: { article: string }) {
     <div className="relative">
       <div className="font-semibold text-5xl p-5 mb-5 mt-10">{page.title}</div>
       <div className="mx-5 mt-5 p-2 bg-background border-slate-500 border rounded flex items-center">
-        <div className="rounded-full mr-2">
-          <img
-            src={page.author.image}
-            alt={page.author.name || page.author.email}
-            width="auto"
-            height="45"
-            className="rounded-full h-10 w-10"
-          />
-        </div>
+        {page.author.image ? (
+          <div className="rounded-full mr-2">
+            <img
+              src={page.author.image}
+              alt={page.author.name}
+              width="auto"
+              height="45"
+              className="rounded-full h-10 w-10"
+            />
+          </div>
+        ) : null}
         <div className="text-sm">
-          Author: {page.author.name || page.author.email} | Published:{" "}
+          Author: {page.author.name} | Published:{" "}
           {new Date(page.createdAt).toLocaleDateString()}
         </div>
       </div>
