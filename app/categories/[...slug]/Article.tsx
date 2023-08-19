@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
 import { Markdown } from "@/lib/markdown";
+import Link from "next/link";
 import { BackgroundCircles } from "@/components/BackgroundCircles";
 
 export async function Article({ article }: { article: string }) {
@@ -17,6 +18,12 @@ export async function Article({ article }: { article: string }) {
       author: {
         select: { name: true, image: true },
       },
+      categories: {
+        select: {
+          id: true,
+          title: true,
+        },
+      },
       createdAt: true,
     },
   });
@@ -31,6 +38,7 @@ export async function Article({ article }: { article: string }) {
       <div className="mx-5 mt-5 p-2 bg-background border-slate-500 border rounded flex items-center">
         {page.author.image ? (
           <div className="rounded-full mr-2">
+            {/*  eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={page.author.image}
               alt={page.author.name}
@@ -44,6 +52,18 @@ export async function Article({ article }: { article: string }) {
           Author: {page.author.name} | Published:{" "}
           {new Date(page.createdAt).toLocaleDateString()}
         </div>
+      </div>
+      <div className="flex max-w-md pt-5 mx-5 gap-2">
+        {page.categories.map((category) => (
+          <Link
+            href={`/categories/${category.title.replaceAll(" ", "-")}`}
+            key={category.id}
+          >
+            <div className="bg-primary rounded-md p-2 text-sm">
+              {category.title}
+            </div>
+          </Link>
+        ))}
       </div>
       <div className="article px-5 pb-5">
         <Markdown>{page.content}</Markdown>
