@@ -85,40 +85,40 @@ export async function generateMetadata({
   }
 }
 
-export async function generateStaticParams() {
-  const categories = await db.category.findMany({
-    select: {
-      title: true,
-    },
-  });
+// export async function generateStaticParams() {
+//   const categories = await db.category.findMany({
+//     select: {
+//       title: true,
+//     },
+//   });
 
-  const articles = await db.article.findMany({
-    select: {
-      id: true,
-      categories: {
-        select: {
-          title: true,
-        },
-      },
-    },
-  });
+//   const articles = await db.article.findMany({
+//     select: {
+//       id: true,
+//       categories: {
+//         select: {
+//           title: true,
+//         },
+//       },
+//     },
+//   });
 
-  const params = [
-    ...categories.map((category) => ({
-      slug: [category.title.replaceAll(" ", "-")],
-    })),
-  ];
+//   const params = [
+//     ...categories.map((category) => ({
+//       slug: [category.title.replaceAll(" ", "-")],
+//     })),
+//   ];
 
-  articles.forEach((article) => {
-    article.categories.forEach((category) => {
-      params.push({
-        slug: [category.title.replaceAll(" ", "-"), article.id.toString()],
-      });
-    });
-  });
+//   articles.forEach((article) => {
+//     article.categories.forEach((category) => {
+//       params.push({
+//         slug: [category.title.replaceAll(" ", "-"), article.id.toString()],
+//       });
+//     });
+//   });
 
-  return params;
-}
+//   return params;
+// }
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
   const [category, article, editArticleFlag] = params.slug;
