@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "A blog about living the code life.",
 };
 
-export default async function CategoriesLayout({
+export default async function AboutLayout({
   children, // will be a page or nested layout
 }: {
   children: React.ReactNode;

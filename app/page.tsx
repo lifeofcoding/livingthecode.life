@@ -40,20 +40,20 @@ export default async function Home() {
       <div className="container mt-[150px] md:mt-[200px] flex h-[200vh] flex-col items-center justify-start px-4 py-6">
         <div className="sticky top-20 flex flex-col items-center justify-center gap-12 px-4 py-6">
           <div className="page-bg-gradient absolute z-[-1]"></div>
-          <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
+          <h1 className="text-5xl font-extrabold tracking-tight dark:text-white sm:text-[5rem]">
             Hi, I&apos;m Life<span className="text-purple-500">Of</span>
             Coding<span className="text-hot-pink">.</span>
           </h1>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
             <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
+              className="flex max-w-xs flex-col gap-4 rounded-xl bg-black/10 dark:bg-white/10 p-4 dark:text-white hover:bg-white/20"
               href="/categories"
             >
               <h3 className="text-2xl font-bold">Categories →</h3>
               <div className="text-lg">Software Engineering Topics</div>
             </Link>
             <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
+              className="flex max-w-xs flex-col gap-4 rounded-xl bg-black/10 dark:bg-white/10 p-4 dark:text-white hover:bg-white/20"
               href="about"
             >
               <h3 className="text-2xl font-bold">About Me →</h3>
@@ -68,7 +68,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="relative mt-[-100vh] min-h-screen w-full bg-black/50 text-center text-white backdrop-blur-sm">
+      <div className="relative mt-[-100vh] min-h-screen w-full bg-white/50 dark:bg-black/50 text-center dark:text-white backdrop-blur-sm">
         <div className="m-2 container ml-auto mr-auto">
           <h1 className="mb-5 text-2xl">Recent Articles</h1>
 

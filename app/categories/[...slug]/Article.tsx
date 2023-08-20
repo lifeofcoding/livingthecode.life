@@ -34,7 +34,9 @@ export async function Article({ article }: { article: string }) {
 
   return (
     <div className="relative">
-      <div className="font-semibold text-5xl p-5 mb-5 mt-10">{page.title}</div>
+      <div className="font-semibold text-4xl md:text-5xl p-5 mb-5 mt-10">
+        {page.title}
+      </div>
       <div className="mx-5 mt-5 p-2 bg-background border-slate-500 border rounded flex items-center">
         {page.author.image ? (
           <div className="rounded-full mr-2">
@@ -53,14 +55,14 @@ export async function Article({ article }: { article: string }) {
           {new Date(page.createdAt).toLocaleDateString()}
         </div>
       </div>
-      <div className="flex max-w-md pt-5 mx-5 gap-2">
+      <div className="flex flex-wrap max-w-md pt-5 mx-5 gap-2 oitems-center">
         {page.categories.map((category) => (
           <Link
             href={`/categories/${category.title.replaceAll(" ", "-")}`}
             key={category.id}
           >
-            <div className="bg-primary rounded-md p-2 text-sm">
-              {category.title}
+            <div className="bg-primary rounded-md p-2 text-sm h-full flex items-center justify-center">
+              <span>{category.title}</span>
             </div>
           </Link>
         ))}
