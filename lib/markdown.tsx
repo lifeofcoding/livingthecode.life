@@ -1,34 +1,79 @@
 import ReactMarkdown from "react-markdown";
+import { cn } from "./utils";
+import { CodeBlock } from "@components/CodeBock";
 
 export function Markdown({ children }: { children: string }) {
   return (
     <ReactMarkdown
       components={{
-        h1: ({ children }) => (
-          <h1 className="text-4xl font-semibold pt-5">{children}</h1>
+        h1: ({ className, ...props }) => (
+          <h1
+            className={cn(
+              "mt-2 scroll-m-20 text-4xl font-bold tracking-tight",
+              className
+            )}
+            {...props}
+          />
         ),
-        h2: ({ children }) => (
-          <h2 className="text-3xl font-semibold pt-5">{children}</h2>
+        h2: ({ className, ...props }) => (
+          <h2
+            className={cn(
+              "mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight first:mt-0",
+              className
+            )}
+            {...props}
+          />
         ),
-        h3: ({ children }) => (
-          <h3 className="text-2xl font-semibold pt-5">{children}</h3>
+        h3: ({ className, ...props }) => (
+          <h3
+            className={cn(
+              "mt-8 scroll-m-20 text-2xl font-semibold tracking-tight",
+              className
+            )}
+            {...props}
+          />
         ),
-        h4: ({ children }) => (
-          <h4 className="text-xl font-semibold pt-5">{children}</h4>
+        h4: ({ className, ...props }) => (
+          <h4
+            className={cn(
+              "mt-8 scroll-m-20 text-xl font-semibold tracking-tight",
+              className
+            )}
+            {...props}
+          />
         ),
-        h5: ({ children }) => (
-          <h5 className="text-lg font-semibold pt-5">{children}</h5>
+        h5: ({ className, ...props }) => (
+          <h5
+            className={cn(
+              "mt-8 scroll-m-20 text-lg font-semibold tracking-tight",
+              className
+            )}
+            {...props}
+          />
         ),
-        h6: ({ children }) => (
-          <h6 className="text-base font-semibold pt-5">{children}</h6>
+        h6: ({ className, ...props }) => (
+          <h6
+            className={cn(
+              "mt-8 scroll-m-20 text-base font-semibold tracking-tight",
+              className
+            )}
+            {...props}
+          />
         ),
-        p: ({ children }) => (
-          <div className="text-base py-3 whitespace-pre-line">{children}</div>
+        p: ({ className, ...props }) => (
+          <p
+            className={cn("leading-7 [&:not(:first-child)]:mt-6", className)}
+            {...props}
+          />
         ),
-        a: ({ children, href }) => (
-          <a className="text-base text-blue-500" target="_blank" href={href}>
-            {children}
-          </a>
+        a: ({ className, ...props }) => (
+          <a
+            className={cn(
+              "font-medium underline underline-offset-4",
+              className
+            )}
+            {...props}
+          />
         ),
         ul: ({ children }) => (
           <ul className="text-base list-disc">{children}</ul>
@@ -40,20 +85,70 @@ export function Markdown({ children }: { children: string }) {
         blockquote: ({ children }) => (
           <blockquote className="text-base">{children}</blockquote>
         ),
-        code: ({ children }) => (
-          <div className="border border-foreground/40 bg-black/60 p-5">
-            <pre className="text-base whitespace-break-spaces">{children}</pre>
-          </div>
-        ),
+        code: ({ children }) => <CodeBlock>{children}</CodeBlock>,
+        // code: ({ className, ...props }) => (
+        //   <code
+        //     className={cn(
+        //       "relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-sm",
+        //       className
+        //     )}
+        //     {...props}
+        //   />
+        // ),
         pre: ({ children }) => <pre className="text-base">{children}</pre>,
-        img: ({ children, src, alt }) => (
-          <img src={src} alt={alt} width="100%" height="auto" />
+        img: ({
+          className,
+          alt,
+          ...props
+        }: React.ImgHTMLAttributes<HTMLImageElement>) => (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            className={cn("rounded-md border", className)}
+            alt={alt}
+            {...props}
+          />
         ),
         em: ({ children }) => <em className="text-base">{children}</em>,
         strong: ({ children }) => (
           <strong className="text-base">{children}</strong>
         ),
         br: ({ children }) => <div className="mb-2 w-full"></div>,
+        hr: ({ ...props }) => <hr className="my-4 md:my-8" {...props} />,
+        table: ({
+          className,
+          ...props
+        }: React.HTMLAttributes<HTMLTableElement>) => (
+          <div className="my-6 w-full overflow-y-auto">
+            <table className={cn("w-full", className)} {...props} />
+          </div>
+        ),
+        tr: ({
+          className,
+          ...props
+        }: React.HTMLAttributes<HTMLTableRowElement>) => (
+          <tr
+            className={cn("m-0 border-t p-0 even:bg-muted", className)}
+            {...props}
+          />
+        ),
+        th: ({ className, ...props }) => (
+          <th
+            className={cn(
+              "border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right",
+              className
+            )}
+            {...props}
+          />
+        ),
+        td: ({ className, ...props }) => (
+          <td
+            className={cn(
+              "border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right",
+              className
+            )}
+            {...props}
+          />
+        ),
       }}
     >
       {children}

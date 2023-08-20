@@ -55,7 +55,7 @@ export async function Article({ article }: { article: string }) {
           {new Date(page.createdAt).toLocaleDateString()}
         </div>
       </div>
-      <div className="flex flex-wrap max-w-md pt-5 mx-5 gap-2 oitems-center">
+      <div className="flex flex-wrap max-w-md py-5 mx-5 gap-2 items-center">
         {page.categories.map((category) => (
           <Link
             href={`/categories/${category.title.replaceAll(" ", "-")}`}

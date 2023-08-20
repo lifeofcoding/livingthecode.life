@@ -1,9 +1,10 @@
 "use client";
-import { useThemeContext } from "@/app/ThemeContextProvider";
+import { useTheme } from "next-themes";
 export function ThemeToggle() {
-  const { theme, setTheme } = useThemeContext();
+  const { theme, setTheme } = useTheme();
+
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    setTheme(theme === "light" ? "dark" : "light");
   };
   return (
     <button

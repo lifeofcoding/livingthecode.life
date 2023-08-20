@@ -1,4 +1,5 @@
 import { db } from "@lib/db";
+import { siteConfig } from "@/config/site";
 import { NewCategory } from "./NewCategory";
 import { Category } from "./Category";
 import { NewArticle } from "./NewArticle";
@@ -15,33 +16,33 @@ export async function generateMetadata({
 
   if (category == "new") {
     return {
-      title: "LivingTheCode.Life | New Category",
-      description: "A blog about living the code life.",
+      title: siteConfig.name + " | New Category",
+      description: siteConfig.description,
     };
   }
 
   if (!article) {
     return {
-      title: "LivingTheCode.Life | " + category.replaceAll("-", " "),
-      description: "A blog about living the code life.",
+      title: siteConfig.name + " | " + category.replaceAll("-", " "),
+      description: siteConfig.description,
     };
   }
 
   if (article == "new") {
     return {
-      title: "LivingTheCode.Life | New Article",
-      description: "A blog about living the code life.",
+      title: siteConfig.name + " | New Article",
+      description: siteConfig.description,
     };
   } else if (article == "edit") {
     return {
-      title: "LivingTheCode.Life | Edit Article",
-      description: "A blog about living the code life.",
+      title: siteConfig.name + " | Edit Article",
+      description: siteConfig.description,
     };
   } else {
     if (isNaN(Number(article))) {
       return {
-        title: "LivingTheCode.Life",
-        description: "A blog about living the code life.",
+        title: siteConfig.name,
+        description: siteConfig.description,
       };
     }
     const page = await db.article.findUnique({
@@ -52,16 +53,71 @@ export async function generateMetadata({
 
     if (!page) {
       return {
-        title: "LivingTheCode.Life",
-        description: "A blog about living the code life.",
+        title: siteConfig.name,
+        description: siteConfig.description,
       };
     }
 
     return {
-      title: "LivingTheCode.Life | " + page.title,
-      description: "A blog about living the code life.",
+      title: `${page.title} | ${siteConfig.name}`,
+      description: siteConfig.description,
+      openGraph: {
+        title: `${page.title} | ${siteConfig.name}`,
+        description: siteConfig.description,
+        type: "article",
+        url: `${siteConfig.url}/${category}/${article}`,
+        images: [
+          {
+            url: `${siteConfig.url}/og.jpg`,
+            width: 1200,
+            height: 630,
+            alt: `${page.title} | ${siteConfig.name}`,
+          },
+        ],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${page.title} | ${siteConfig.name}`,
+        description: siteConfig.description,
+        images: [`${siteConfig.url}/og.jpg`],
+      },
     };
   }
+}
+
+export async function generateStaticParams() {
+  const categories = await db.category.findMany({
+    select: {
+      title: true,
+    },
+  });
+
+  const articles = await db.article.findMany({
+    select: {
+      id: true,
+      categories: {
+        select: {
+          title: true,
+        },
+      },
+    },
+  });
+
+  const params = [
+    ...categories.map((category) => ({
+      slug: [category.title.replaceAll(" ", "-")],
+    })),
+  ];
+
+  articles.forEach((article) => {
+    article.categories.forEach((category) => {
+      params.push({
+        slug: [category.title.replaceAll(" ", "-"), article.id.toString()],
+      });
+    });
+  });
+
+  return params;
 }
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
@@ -82,8 +138,6 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   if (article == "new") {
     return <NewArticle category={category} />;
   }
-
-  /// above is perfect
 
   if (editArticleFlag == "edit") {
     return <EditArticle article={article} />;
