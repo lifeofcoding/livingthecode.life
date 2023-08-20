@@ -72,6 +72,7 @@ export function Markdown({ children }: { children: string }) {
               "font-medium underline underline-offset-4",
               className
             )}
+            target="_blank"
             {...props}
           />
         ),

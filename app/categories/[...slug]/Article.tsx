@@ -39,7 +39,7 @@ export async function Article({ article }: { article: string }) {
       </div>
       <div className="mx-5 mt-5 p-2 bg-background border-slate-500 border rounded flex items-center">
         {page.author.image ? (
-          <div className="rounded-full mr-2">
+          <div className="rounded-full mr-2 min-w-max">
             {/*  eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={page.author.image}
