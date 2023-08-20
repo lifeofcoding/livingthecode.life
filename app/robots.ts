@@ -12,6 +12,6 @@ export default function robots(): MetadataRoute.Robots {
         `${env.NEXT_PUBLIC_APP_URL}/categories/*/new`,
       ],
     },
-    sitemap: `${env.NEXT_PUBLIC_APP_URL}sitemap.xml`,
+    sitemap: `${env.NEXT_PUBLIC_APP_URL}/sitemap.xml`,
   };
 }

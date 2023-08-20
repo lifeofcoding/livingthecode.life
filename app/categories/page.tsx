@@ -6,6 +6,10 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function Categories() {
+  // For testing loading states
+  // const sleep = () => new Promise((resolve) => setTimeout(resolve, 3000));
+
+  // await sleep();
   const categories = await db.category.findMany({
     take: 10,
   });

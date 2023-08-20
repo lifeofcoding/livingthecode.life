@@ -25,7 +25,7 @@ export async function Articles({ category }: { category: string }) {
     return article.categories[0].title.replaceAll(" ", "-");
   };
   return (
-    <div className="pt-2 space-y-1">
+    <div className="pt-2 pr-2 space-y-1">
       <div className="text-foreground mb-2">Articles:</div>
       {articles.map((article) => (
         <Link

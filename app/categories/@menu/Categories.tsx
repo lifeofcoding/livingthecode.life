@@ -13,7 +13,7 @@ export async function Categories() {
     },
   });
   return (
-    <div className="pt-2 space-y-1">
+    <div className="pt-2 pr-2 space-y-1">
       <div className="text-foreground mb-2">Categories:</div>
       {categories.map((category) => (
         <Link

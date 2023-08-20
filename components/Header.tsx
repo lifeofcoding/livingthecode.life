@@ -11,6 +11,25 @@ import {
 import { SearchBox } from "@/components/SearchBox";
 import { Code2 } from "lucide-react";
 
+const MENU_ITEMS = [
+  {
+    title: "Data Structures",
+    href: "/categories/Data-Structures",
+  },
+  {
+    title: "Algorithms",
+    href: "/categories/algorithms",
+  },
+  {
+    title: "Machine Learning",
+    href: "/categories/Machine-Learning",
+  },
+  {
+    title: "Categories",
+    href: "/categories",
+  },
+];
+
 export function Header() {
   return (
     <header className="supports-backdrop-blur:bg-background/60 sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
@@ -23,30 +42,15 @@ export function Header() {
             </span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
-            <Link
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-              href="/categories/Data-Structures"
-            >
-              Data Structures
-            </Link>
-            <Link
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-              href="/categories/algorithms"
-            >
-              Algorithms
-            </Link>
-            <Link
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-              href="/categories/Machine-Learning"
-            >
-              Machine Learning
-            </Link>
-            <Link
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-              href="/categories"
-            >
-              Categories
-            </Link>
+            {MENU_ITEMS.map((item) => (
+              <Link
+                className="transition-colors hover:text-foreground/80 text-foreground/60"
+                href={item.href}
+                key={item.title}
+              >
+                {item.title}
+              </Link>
+            ))}
             <a
               className="hidden text-foreground/60 transition-colors hover:text-foreground/80 lg:block"
               href="https://github.com/lifeofcoding"
@@ -78,40 +82,24 @@ export function Header() {
           </SheetTrigger>
           <SheetContent side="left">
             <SheetHeader>
-              <SheetTitle>LivingTheCode.Life</SheetTitle>
+              <Link href="/">
+                <SheetTitle>LivingTheCode.Life</SheetTitle>
+              </Link>
               <SheetDescription></SheetDescription>
             </SheetHeader>
 
             <div className="flex flex-col space-y-3">
-              <SheetClose asChild>
-                <Link
-                  href="/categories/data-structures"
-                  className="text-muted-foreground"
-                >
-                  Data Structureds
-                </Link>
-              </SheetClose>
-              <SheetClose asChild>
-                <Link
-                  href="/categories/algorithms"
-                  className="text-muted-foreground"
-                >
-                  Algorithms
-                </Link>
-              </SheetClose>
-              <SheetClose asChild>
-                <Link
-                  href="/categories/machine-learning"
-                  className="text-muted-foreground"
-                >
-                  Machine Learning
-                </Link>
-              </SheetClose>
-              <SheetClose asChild>
-                <Link href="/categories" className="text-muted-foreground">
-                  Categories
-                </Link>
-              </SheetClose>
+              {MENU_ITEMS.map((item) => (
+                <SheetClose asChild key={item.title}>
+                  <Link
+                    href={item.href}
+                    className="text-muted-foreground"
+                    key={item.title}
+                  >
+                    {item.title}
+                  </Link>
+                </SheetClose>
+              ))}
               <a
                 href="https://github.com/lifeofcoding"
                 className="text-muted-foreground"
