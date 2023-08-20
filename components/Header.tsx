@@ -42,23 +42,29 @@ export function Header() {
               LivingTheCode.Life
             </span>
           </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
-            {MENU_ITEMS.map((item) => (
-              <Link
-                className="transition-colors hover:text-primary/80 text-foreground/60"
-                href={item.href}
-                key={item.title}
-              >
-                {item.title}
-              </Link>
-            ))}
-            <a
-              className="hidden text-foreground/60 transition-colors hover:text-foreground/80 lg:block"
-              href="https://github.com/lifeofcoding"
-              target="_blank"
-            >
-              GitHub
-            </a>
+          <nav className="">
+            <ul className="flex items-center space-x-6 text-sm font-medium navbar">
+              {MENU_ITEMS.map((item) => (
+                <li key={item.title} className="after:bg-primary">
+                  <Link
+                    className="transition-colors hover:text-primary/80 text-foreground/60"
+                    href={item.href}
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+
+              <li className="after:bg-primary">
+                <a
+                  className="hidden text-foreground/60 transition-colors hover:text-primary/80 lg:block"
+                  href="https://github.com/lifeofcoding"
+                  target="_blank"
+                >
+                  GitHub
+                </a>
+              </li>
+            </ul>
           </nav>
         </div>
 

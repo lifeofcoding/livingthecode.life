@@ -662,4 +662,40 @@
     }
   }
   /* End Stars */
+
+  /* Navbar Hover Effect */
+
+  .navbar li {
+    position: relative;
+  }
+
+  .navbar li::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    translate: var(--_translate, 0);
+    scale: var(--_width, 0) 1;
+    transition: scale 300ms var(--_scale-delay, 0ms),
+      translate 500ms var(--_translate-delay, 0ms);
+  }
+
+  .navbar li:hover {
+    --_width: 1;
+  }
+
+  .navbar li:hover + li {
+    --_translate: -100%;
+    --_scale-delay: 500ms;
+    --_translate-delay: 200ms;
+  }
+
+  nav li:has(+ :hover) {
+    --_translate: 100%;
+    --_scale-delay: 500ms;
+    --_translate-delay: 200ms;
+  }
+  /* End Navbar Hover Effect */
 }
