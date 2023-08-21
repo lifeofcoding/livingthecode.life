@@ -65,7 +65,7 @@ export async function generateMetadata({
         title: `${page.title} | ${siteConfig.name}`,
         description: siteConfig.description,
         type: "article",
-        url: `${siteConfig.url}/${category}/${article}`,
+        url: `${siteConfig.url}/categories/${category}/${article}`,
         images: [
           {
             url: `${siteConfig.url}/og.jpg`,
