@@ -35,9 +35,14 @@ const formSchema = z.object({
   title: z.string().min(5, {
     message: "Title must be at least 5 characters.",
   }),
-  content: z.string().min(10, {
-    message: "Content must be at least 10 characters.",
-  }),
+  content: z
+    .string()
+    .min(10, {
+      message: "Content must be at least 10 characters.",
+    })
+    .max(10000, {
+      message: "Content must be less than 100000 characters.",
+    }),
 });
 
 export function EditCategoryForm({
@@ -151,7 +156,12 @@ export function EditCategoryForm({
                           }}
                         />
                       </FormControl>
-                      <FormDescription>Must be in markdown</FormDescription>
+                      <FormDescription>
+                        Must be in markdown{" "}
+                        {watchContent.length
+                          ? `(${watchContent.length} characters)`
+                          : ""}
+                      </FormDescription>
                       <FormMessage />
                       {formErrors ? (
                         <p className="text-sm font-medium text-destructive">

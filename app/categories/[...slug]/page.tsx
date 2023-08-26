@@ -59,6 +59,7 @@ export async function generateMetadata({
     }
 
     return {
+      metadataBase: new URL(siteConfig.url),
       title: `${page.title} | ${siteConfig.name}`,
       description: siteConfig.description,
       openGraph: {

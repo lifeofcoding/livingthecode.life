@@ -12,6 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 // };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
   authors: [
     {
       name: "lifeofcoding",
-      url: "https://lifeofcoding.life",
+      url: siteConfig.url,
     },
   ],
   creator: "shadcn",

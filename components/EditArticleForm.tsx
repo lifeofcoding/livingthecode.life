@@ -50,9 +50,14 @@ const formSchema = z.object({
   title: z.string().min(5, {
     message: "Title must be at least 5 characters.",
   }),
-  content: z.string().min(10, {
-    message: "Content must be at least 10 characters.",
-  }),
+  content: z
+    .string()
+    .min(10, {
+      message: "Content must be at least 10 characters.",
+    })
+    .max(10000, {
+      message: "Content must be less than 100000 characters.",
+    }),
   categories: z.array(z.number()).nonempty({
     message: "At least one category must be selected.",
   }),
@@ -266,7 +271,10 @@ export function EditArticleForm({
                         />
                       </FormControl>
                       <FormDescription>
-                        This is the page content
+                        Must be in markdown{" "}
+                        {watchContent.length
+                          ? `(${watchContent.length} characters)`
+                          : ""}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>

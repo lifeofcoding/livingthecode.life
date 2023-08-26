@@ -86,7 +86,11 @@ export function Markdown({ children }: { children: string }) {
         blockquote: ({ children }) => (
           <blockquote className="text-base">{children}</blockquote>
         ),
-        code: ({ children }) => <CodeBlock>{children}</CodeBlock>,
+        code: ({ children, inline, className }) => (
+          <CodeBlock inline={inline} className={className}>
+            {children}
+          </CodeBlock>
+        ),
         // code: ({ className, ...props }) => (
         //   <code
         //     className={cn(
