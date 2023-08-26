@@ -16,33 +16,28 @@ export async function generateMetadata({
 
   if (category == "new") {
     return {
-      title: siteConfig.name + " | New Category",
-      description: siteConfig.description,
+      title: "New Category",
     };
   }
 
   if (!article) {
     return {
-      title: siteConfig.name + " | " + category.replaceAll("-", " "),
-      description: siteConfig.description,
+      title: category.replaceAll("-", " "),
     };
   }
 
   if (article == "new") {
     return {
-      title: siteConfig.name + " | New Article",
-      description: siteConfig.description,
+      title: "New Article",
     };
   } else if (article == "edit") {
     return {
-      title: siteConfig.name + " | Edit Article",
-      description: siteConfig.description,
+      title: "Edit Article",
     };
   } else {
     if (isNaN(Number(article))) {
       return {
-        title: siteConfig.name,
-        description: siteConfig.description,
+        title: "Not Found",
       };
     }
     const page = await db.article.findUnique({
@@ -53,15 +48,13 @@ export async function generateMetadata({
 
     if (!page) {
       return {
-        title: siteConfig.name,
-        description: siteConfig.description,
+        title: "Not Found",
       };
     }
 
     return {
       metadataBase: new URL(siteConfig.url),
-      title: `${page.title} | ${siteConfig.name}`,
-      description: siteConfig.description,
+      title: page.title,
       openGraph: {
         title: `${page.title} | ${siteConfig.name}`,
         description: siteConfig.description,

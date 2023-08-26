@@ -1,9 +1,14 @@
 import { PageCirclesHero } from "@/components/PageCirclesHero";
 import { db } from "@/lib/db";
 import Link from "next/link";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
+
+export const metadata: Metadata = {
+  title: "Categories",
+};
 
 export default async function Categories() {
   // For testing loading states

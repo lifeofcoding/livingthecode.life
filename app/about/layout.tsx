@@ -4,8 +4,7 @@ import { Suspense } from "react";
 
 import type { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "LivingTheCode.Life | About Me",
-  description: "A blog about living the code life.",
+  title: "About Me",
 };
 
 export default async function AboutLayout({
