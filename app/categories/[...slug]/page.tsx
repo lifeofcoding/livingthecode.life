@@ -6,6 +6,7 @@ import { NewArticle } from "./NewArticle";
 import { Article } from "./Article";
 import { EditCategory } from "./EditCategory";
 import { EditArticle } from "./EditArticle";
+import { ScrollReset } from "@/components/ScrollReset";
 
 export async function generateMetadata({
   params,
@@ -122,7 +123,11 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   }
 
   if (!article) {
-    return <Category category={category} />;
+    return (
+      <ScrollReset>
+        <Category category={category} />
+      </ScrollReset>
+    );
   }
 
   if (article == "edit") {
@@ -137,5 +142,9 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
     return <EditArticle article={article} />;
   }
 
-  return <Article article={article} />;
+  return (
+    <ScrollReset>
+      <Article article={article} />
+    </ScrollReset>
+  );
 }
