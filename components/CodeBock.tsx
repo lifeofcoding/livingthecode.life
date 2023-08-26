@@ -1,5 +1,5 @@
 "use client";
-import { useRef, ReactNode } from "react";
+import { useRef, ReactNode, useLayoutEffect, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 /*
   Themes: 
@@ -17,6 +17,7 @@ import {
   atomDark,
 } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useTheme } from "next-themes";
+import { Skeleton } from "./ui/skeleton";
 
 export function CodeBlock({
   children,
@@ -28,6 +29,7 @@ export function CodeBlock({
   inline?: boolean;
 }) {
   const { theme } = useTheme();
+  const [loaded, setLoaded] = useState(false);
   const match = /language-(\w+)/.exec(className || "");
   const ref = useRef<HTMLDivElement>(null);
   const copyText = () => {
@@ -35,6 +37,10 @@ export function CodeBlock({
     const text = ref.current.innerText;
     navigator.clipboard.writeText(text);
   };
+
+  useLayoutEffect(() => {
+    setLoaded(true);
+  }, []);
   return (
     <div className="relative group">
       <div
@@ -42,14 +48,21 @@ export function CodeBlock({
         ref={ref}
       >
         {!inline && match ? (
-          <SyntaxHighlighter
-            // children={String(children).replace(/\n$/, "")}
-            style={theme === "dark" ? atomDark : base16AteliersulphurpoolLight}
-            language={match[1]}
-            PreTag="div"
-          >
-            {String(children).replace(/\n$/, "")}
-          </SyntaxHighlighter>
+          <>
+            {loaded ? (
+              <SyntaxHighlighter
+                style={
+                  theme === "dark" ? atomDark : base16AteliersulphurpoolLight
+                }
+                language={match[1]}
+                PreTag="div"
+              >
+                {String(children).replace(/\n$/, "")}
+              </SyntaxHighlighter>
+            ) : (
+              <Skeleton className="w-full flex h-16" />
+            )}
+          </>
         ) : (
           children
         )}
