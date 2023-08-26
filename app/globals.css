@@ -187,7 +187,7 @@
     list-style: none;
     width: 20px;
     height: 20px;
-    background: rgba(255, 255, 255, 0.2);
+    @apply dark:bg-white/20 bg-primary/20;
     animation: animate-circles 25s linear infinite;
     bottom: -150px;
   }
