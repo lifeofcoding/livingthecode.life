@@ -1,5 +1,6 @@
 import { BackgroundCircles } from "@/components/BackgroundCircles";
-import { Header } from "../components/Header";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import Link from "next/link";
 import { db } from "@/lib/db";
 
@@ -107,6 +108,8 @@ export default async function Home() {
           </div>
         </div>
       </div>
+
+      <Footer />
     </main>
   );
 }

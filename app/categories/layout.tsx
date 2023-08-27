@@ -5,6 +5,7 @@ import { cn } from "@lib/utils";
 
 // Have to do this because main pages loading state will show for both parallel routes before their individal loading states show see: https://github.com/vercel/next.js/issues/49243
 import Loading from "./_loading";
+import { Footer } from "@components/Footer";
 
 export default async function CategoriesLayout({
   children, // will be a page or nested layout
@@ -62,6 +63,8 @@ export default async function CategoriesLayout({
           <Suspense fallback={<Loading />}>{children}</Suspense>
         </section>
       </div>
+
+      <Footer />
     </main>
   );
 }
