@@ -19,6 +19,9 @@ export async function Articles({ category }: { category: string }) {
         take: 1,
       },
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   const getCategory = (article: (typeof articles)[0]) => {
