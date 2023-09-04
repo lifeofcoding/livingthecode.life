@@ -1,7 +1,7 @@
 import { Header } from "@components/Header";
+import { Sidebar } from "@components/Sidebar";
 
 import { Suspense } from "react";
-import { cn } from "@lib/utils";
 
 // Have to do this because main pages loading state will show for both parallel routes before their individal loading states show see: https://github.com/vercel/next.js/issues/49243
 import Loading from "./_loading";
@@ -19,45 +19,11 @@ export default async function CategoriesLayout({
       <Header />
 
       <div className="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
-        <aside
-          className={cn(
-            "bg-background/70",
-            "border-r",
-            "hover:bg-background/90",
-            "md:hover:bg-transparent",
-            "md:bg-transparent",
-            "fixed",
-            "top-14",
-            "z-30",
-            "ml-2",
-            "max-w-[220px]",
-            "translate-x-[-102%]",
-            "hover:translate-x-[calc(-1*2rem)]",
-            "md:hover:translate-x-0",
-            "transition-transform",
-            "md:translate-x-0",
-            "h-[calc(100vh-3.5rem)]",
-            "w-full",
-            "shrink-0",
-            "md:sticky",
-            "md:block",
-            "after:content-['>>']",
-            "md:after:hidden",
-            "after:absolute",
-            "after:top-[30vh]",
-            "after:right-0",
-            "after:rounded-full",
-            "after:h-10",
-            "after:w-10",
-            "after:flex",
-            "after:justify-center",
-            "after:items-center"
-          )}
-        >
+        <Sidebar>
           <Suspense fallback={<div>Loading...</div>}>
             {menu ? menu : null}
           </Suspense>
-        </aside>
+        </Sidebar>
 
         <section className="pl-3 md:pl-auto">
           <Suspense fallback={<Loading />}>{children}</Suspense>
