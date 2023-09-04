@@ -6,7 +6,7 @@ export const appRouter = router({
   getChatToken: publicProcedure.query(async () => {
     const token = jwt.sign(
       {
-        exp: Math.floor(Date.now() / 1000) + 60 * 60, // 1 hour - 1681946664
+        exp: Math.floor(Date.now() / 1000) + 60 * 10, // 10min
       },
       env.JWT_SECRET
     );

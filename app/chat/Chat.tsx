@@ -13,7 +13,8 @@ export default function Chat({ initialToken }: { initialToken: string }) {
     initialData: initialToken,
     refetchOnMount: false,
     refetchOnReconnect: false,
-    staleTime: 10000,
+    staleTime: 1000 * 60 * 4, // 4 minutes
+    refetchInterval: 1000 * 60 * 5, // 5 minutes
   });
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
     useChat({
