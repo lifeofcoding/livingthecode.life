@@ -10,7 +10,7 @@ https://github.com/aws-samples/zero-administration-inference-with-aws-lambda-for
 https://www.cloudtechsimplified.com/elastic-file-system-efs-aws-lambda/
 */
 
-export function TextGeneration({ stack }: StackContext) {
+export function HuggingFace({ stack }: StackContext) {
   const vpc = new ec2.Vpc(stack, "VpcLambda", {
     maxAzs: 2,
     subnetConfiguration: [
@@ -59,9 +59,19 @@ export function TextGeneration({ stack }: StackContext) {
       environment: { TRANSFORMERS_CACHE: "/mnt/hf_models_cache" },
     }
   );
+
+  const functionUrlOutput = lambdaFunction.addFunctionUrl({
+    authType: lambda.FunctionUrlAuthType.AWS_IAM,
+    cors: {
+      allowedOrigins: ["*"],
+      allowedMethods: [lambda.HttpMethod.POST],
+    },
+    invokeMode: lambda.InvokeMode.RESPONSE_STREAM,
+  });
   // lambdaFunction.addEnvironment("FUNCTION_DIR", "gpt2");
 
   stack.addOutputs({
     LambdaName: lambdaFunction.functionName,
+    LambdaUrl: functionUrlOutput.url,
   });
 }

@@ -11,6 +11,7 @@ export const env = createEnv({
     GOOGLE_CLIENT_SECRET: z.string().min(1),
     DATABASE_URL: z.string().min(1),
     OPENAI_API_KEY: z.string().min(1),
+    JWT_SECRET: z.string().min(1),
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string().min(1),
@@ -23,5 +24,6 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    JWT_SECRET: process.env.JWT_SECRET,
   },
 });

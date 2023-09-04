@@ -1,5 +1,6 @@
 import { SSTConfig } from "sst";
-import { TextGeneration } from "./stacks/TextGeneration";
+// import { HuggingFace } from "./stacks/HuggingFace";
+import { OpenAI } from "./stacks/OpenAI";
 
 export default {
   config(_input) {
@@ -9,6 +10,6 @@ export default {
     };
   },
   stacks(app) {
-    app.stack(TextGeneration);
+    app.stack(OpenAI);
   },
 } satisfies SSTConfig;
