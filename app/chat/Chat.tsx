@@ -17,7 +17,7 @@ export default function Chat({ initialToken }: { initialToken: string }) {
     staleTime: 1000 * 60 * 4, // 4 minutes
     refetchInterval: 1000 * 60 * 5, // 5 minutes
   });
-  const [isResponsing, setIsResponsing] = useState(false);
+  const [isResponding, setIsResponding] = useState(false);
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
     useChat({
       api: "https://h5ny25amezrm3c3ggta5ntzbbe0hxolj.lambda-url.us-east-2.on.aws/",
@@ -25,10 +25,10 @@ export default function Chat({ initialToken }: { initialToken: string }) {
         authorization: token,
       },
       onResponse: (res) => {
-        setIsResponsing(true);
+        setIsResponding(true);
       },
       onFinish: (message) => {
-        setIsResponsing(false);
+        setIsResponding(false);
       },
     });
 
@@ -61,7 +61,7 @@ export default function Chat({ initialToken }: { initialToken: string }) {
       <div className="mb-auto  flex-grow flex items-end w-full">
         <section className="flex flex-col justify-end flex-grow">
           <AnimatePresence>
-            {messages.map((m, idx) => (
+            {messages.map((m) => (
               <motion.div
                 key={m.id}
                 initial={"hidden"}
@@ -85,14 +85,12 @@ export default function Chat({ initialToken }: { initialToken: string }) {
                 </div>
               </motion.div>
             ))}
-            {isLoading && !isResponsing ? (
+            {isLoading && !isResponding ? (
               <motion.div
                 key={isLoading ? "loading" : "input"}
                 initial={"hidden"}
                 exit={"hidden"}
                 animate={"visible"}
-                What
-                is
                 variants={variants}
                 className="self-start"
               >
