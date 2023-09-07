@@ -57,7 +57,7 @@ export default function Chat({ initialToken }: { initialToken: string }) {
   };
 
   return (
-    <main className="mx-auto w-full container flex flex-col">
+    <main className="mx-auto w-full container flex flex-col relative">
       {/* <ScrollArea className="mb-auto flex flex-col justify-end flex-grow max-h-[80vh]"> */}
       <div className="mb-auto  flex-grow flex items-end w-full">
         <section className="flex flex-col justify-end flex-grow">
@@ -119,9 +119,7 @@ export default function Chat({ initialToken }: { initialToken: string }) {
         </Button>
       </form>
 
-      <div className="w-full fixed bottom-0 h-full z-[-1]">
-        <BackgroundCircles />
-      </div>
+      <BackgroundCircles />
     </main>
   );
 }
