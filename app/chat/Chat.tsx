@@ -3,10 +3,11 @@
 import { useChat } from "ai/react";
 import { trpc } from "@/app/_trpc/client";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, AnimationProps, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Chat({ initialToken }: { initialToken: string }) {
   const { data: token } = trpc.getChatToken.useQuery(undefined, {
@@ -16,21 +17,43 @@ export default function Chat({ initialToken }: { initialToken: string }) {
     staleTime: 1000 * 60 * 4, // 4 minutes
     refetchInterval: 1000 * 60 * 5, // 5 minutes
   });
+  const [isResponsing, setIsResponsing] = useState(false);
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
     useChat({
       api: "https://h5ny25amezrm3c3ggta5ntzbbe0hxolj.lambda-url.us-east-2.on.aws/",
       headers: {
         authorization: token,
       },
+      onResponse: (res) => {
+        setIsResponsing(true);
+      },
+      onFinish: (message) => {
+        setIsResponsing(false);
+      },
     });
 
   useEffect(() => {
+    if (messages.length === 0) return;
     window.scrollTo({
       top: document.body.scrollHeight,
       left: 0,
       behavior: "smooth",
     });
   }, [messages]);
+
+  const variants: AnimationProps["variants"] = {
+    visible: (i) => ({
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        // delay: i * 0.3,
+        duration: 0.5,
+        type: "spring",
+      },
+    }),
+    hidden: { opacity: 0, scale: 0.8, y: 15 },
+  };
 
   return (
     <main className="mx-auto w-full container flex flex-col">
@@ -41,15 +64,10 @@ export default function Chat({ initialToken }: { initialToken: string }) {
             {messages.map((m, idx) => (
               <motion.div
                 key={m.id}
-                initial={{ opacity: 0, scale: 0.8 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{
-                  duration: 0.5,
-                  type: "spring",
-                  bounce: 0.3,
-                  // delay: idx * 0.1,
-                }}
+                initial={"hidden"}
+                exit={"hidden"}
+                animate={"visible"}
+                variants={variants}
                 className={cn(
                   "mb-4",
                   m.role === "user" ? "self-end" : "self-start"
@@ -67,6 +85,22 @@ export default function Chat({ initialToken }: { initialToken: string }) {
                 </div>
               </motion.div>
             ))}
+            {isLoading && !isResponsing ? (
+              <motion.div
+                key={isLoading ? "loading" : "input"}
+                initial={"hidden"}
+                exit={"hidden"}
+                animate={"visible"}
+                What
+                is
+                variants={variants}
+                className="self-start"
+              >
+                <div className={cn("flex rounded border p-3")}>
+                  <Skeleton className="w-60 h-8" />
+                </div>
+              </motion.div>
+            ) : null}
           </AnimatePresence>
         </section>
       </div>
