@@ -77,7 +77,7 @@ export const handler = awslambda.streamifyResponse(
 
     const body = JSON.parse(event.body);
 
-    const functions = [
+    const OGfunctions = [
       {
         name: "get_current_weather",
         description: "Get the current weather",
@@ -96,6 +96,41 @@ export const handler = awslambda.streamifyResponse(
             },
           },
           required: ["location", "format"],
+        },
+      },
+    ];
+
+    const functions = [
+      {
+        name: "summarize_webpage",
+        description: "Get the contents of a webpage and summarize it",
+        parameters: {
+          type: "object",
+          properties: {
+            url: {
+              type: "string",
+              description: "The url of the website to summarize",
+            },
+          },
+          required: ["url"],
+        },
+      },
+      {
+        name: "steal_girlfriend",
+        description: "Steal a girlfriend by sliding in their DMs",
+        parameters: {
+          type: "object",
+          properties: {
+            name: {
+              type: "string",
+              description: "The name of the girlfriend to steal",
+            },
+            instagram: {
+              type: "string",
+              description: "The instagram username of the girlfriend to steal",
+            },
+          },
+          required: ["name", "instagram"],
         },
       },
     ];

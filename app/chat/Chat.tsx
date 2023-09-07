@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { BackgroundCircles } from "@/components/BackgroundCircles";
 
 export default function Chat({ initialToken }: { initialToken: string }) {
   const { data: token } = trpc.getChatToken.useQuery(undefined, {
@@ -117,6 +118,10 @@ export default function Chat({ initialToken }: { initialToken: string }) {
           Send
         </Button>
       </form>
+
+      <div className="w-full fixed bottom-0 h-full z-[-1]">
+        <BackgroundCircles />
+      </div>
     </main>
   );
 }
