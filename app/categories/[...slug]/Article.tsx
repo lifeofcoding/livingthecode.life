@@ -71,7 +71,7 @@ export async function Article({ article }: { article: string }) {
         <Markdown>{page.content}</Markdown>
       </div>
 
-      <div className="w-full fixed bottom-0 h-full z-[-1]">
+      <div className="w-full max-w-[1044px] fixed bottom-0 h-full z-[-1]">
         <BackgroundCircles />
       </div>
     </div>

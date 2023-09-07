@@ -119,7 +119,7 @@ export default function Chat({ initialToken }: { initialToken: string }) {
         </Button>
       </form>
 
-      <BackgroundCircles />
+      <BackgroundCircles className="z-[-1]" />
     </main>
   );
 }
