@@ -105,7 +105,7 @@ export default function Chat({ initialToken }: { initialToken: string }) {
       </div>
       {/* </ScrollArea> */}
       <form
-        className="flex space-x-4 mb-3 py-3 sticky bottom-0 bg-gradient-to-t from-background via-background to-transparent"
+        className="flex space-x-4 py-5 sticky bottom-0 bg-gradient-to-t from-background via-background to-transparent"
         onSubmit={handleSubmit}
       >
         <Input
@@ -119,7 +119,7 @@ export default function Chat({ initialToken }: { initialToken: string }) {
         </Button>
       </form>
 
-      <BackgroundCircles className="z-[-1]" />
+      {/* <BackgroundCircles className="z-[-1]" /> */}
     </main>
   );
 }
