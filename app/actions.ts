@@ -54,6 +54,12 @@ export async function addCategory({
   content: string;
 }) {
   try {
+    const user = await getCurrentUser();
+
+    if (!user || !user.isAdmin) {
+      throw new Error("Unknown user tried creating an article.");
+    }
+
     const result = await db.category.create({
       data: {
         title,
@@ -80,6 +86,12 @@ export async function editCategory({
   content: string;
 }) {
   try {
+    const user = await getCurrentUser();
+
+    if (!user || !user.isAdmin) {
+      throw new Error("Unknown user tried creating an article.");
+    }
+
     const result = await db.category.update({
       where: {
         id,
@@ -111,8 +123,14 @@ export async function editArticle({
   content: string;
   categories: number[];
 }) {
-  const connectCatgeories = categories.map((id) => ({ id }));
   try {
+    const user = await getCurrentUser();
+
+    if (!user || !user.isAdmin) {
+      throw new Error("Unknown user tried creating an article.");
+    }
+
+    const connectCatgeories = categories.map((id) => ({ id }));
     const result = await db.article.update({
       where: {
         id,
