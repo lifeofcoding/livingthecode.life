@@ -1,8 +1,6 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
 
 datasource db {
@@ -11,20 +9,20 @@ datasource db {
 }
 
 model Account {
-  id                 String    @id @default(cuid())
-  userId              String    @map("user_id")
-  type                 String?
-  provider           String
-  providerAccountId  String    @map("provider_account_id")
-  token_type         String?
-  refresh_token      String?   @db.Text
-  access_token       String?   @db.Text
-  expires_at         Int?
-  scope              String?
-  id_token           String? @db.Text
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
-  user               User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String   @id @default(cuid())
+  userId            String   @map("user_id")
+  type              String?
+  provider          String
+  providerAccountId String   @map("provider_account_id")
+  token_type        String?
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  scope             String?
+  id_token          String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
   @@map("accounts")
@@ -33,28 +31,29 @@ model Account {
 model Session {
   id           String   @id @default(cuid())
   userId       String?  @map("user_id")
-  sessionToken String   @db.Text @map("session_token") @unique
-  accessToken  String?  @db.Text @map("access_token")
+  sessionToken String   @unique @map("session_token")
+  accessToken  String?  @map("access_token")
   expires      DateTime
-  user         User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  user         User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
 }
 
 model User {
-  id                    String     @id @default(uuid())
-  name                  String
-  email                 String?    @unique @db.VarChar(255)
-  emailVerified         DateTime?   @map("email_verified")
-  image                 String?
-  createdAt             DateTime   @default(now())
-  updatedAt             DateTime   @updatedAt
-  isAdmin               Boolean    @default(false)
-  accounts              Account[]
-  sessions              Session[]
-  articles              Article[]
+  id            String    @id @default(uuid())
+  name          String
+  email         String?   @unique @db.VarChar(255)
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  isAdmin       Boolean   @default(false)
+  articles      Article[]
+  accounts      Account[]
+  sessions      Session[]
+
   @@map("users")
 }
 
@@ -71,21 +70,27 @@ model VerificationRequest {
 
 model Article {
   id         Int        @id @default(autoincrement())
-  author     User       @relation(fields: [authorId], references: [id])
-  authorId   String // relation scalar field  (used in the `@relation` attribute above)
-  categories Category[]
-  content     String    @db.VarChar(10000)
-  title       String
-  createdAt   DateTime  @default(now())
-
-  // @@map("article")
+  authorId   String
+  content    String     @db.VarChar(10000)
+  title      String
+  createdAt  DateTime   @default(now())
+  author     User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  categories Category[] @relation("ArticleToCategory")
+  pages     Page[]
 }
 
 model Category {
-  id    Int             @id @default(autoincrement())
-  title  String         @unique
-  content String        @db.VarChar(10000)
-  articles Article[]
+  id       Int       @id @default(autoincrement())
+  content  String    @db.VarChar(10000)
+  title    String    @unique
+  articles Article[] @relation("ArticleToCategory")
+}
 
-  // @@map("category")
+model Page {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String   @db.VarChar(10000)
+  createdAt DateTime @default(now())
+  article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  articleId Int
 }
